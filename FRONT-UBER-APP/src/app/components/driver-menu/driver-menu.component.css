@@ -1,0 +1,9 @@
+::ng-deep .nav-css nav {
+  background-color: #51ca54;
+}
+.navbar-nav .nav-item button {
+  border: 0;
+  background-color: #51ca54;
+  color: white;
+  float: right;
+}

@@ -49,7 +49,7 @@ public class AccountService {
     private EmailService es;
 
     public Boolean registerCitizen(RegisterCitizenDTO rcdto) {
-
+        System.out.println("Register Citizen");
         Citizen citizen = mm.map(rcdto , Citizen.class);
 
         if(!rcdto.getPassword().equals(rcdto.getConfirm())){
@@ -59,7 +59,7 @@ public class AccountService {
         citizen.setPassword(ps.encode(citizen.getPassword()));
 
         cr.save(citizen);
-
+        System.out.println("Saved Citizen");
         String usrn = citizen.getUsername().split("\\@")[0] + "_" + citizen.getUsername().split("\\@")[1].split("\\.")[0];
         //"<a href=\"localhost:8080/verify/" + usrn + "\">Click here to verify your account</a>"
         es.sendEmail(
@@ -82,6 +82,11 @@ public class AccountService {
 //        System.out.println(rddto.getVehicle().getName());
 //        System.out.println(driver.getVehicle().getName());
         driver.setPassword(ps.encode(driver.getPassword()));
+        driver.setVehicle(new Vehicle());
+        driver.getVehicle().setName(rddto.getName());
+        driver.getVehicle().setType(rddto.getType());
+        driver.getVehicle().setPetFriendly(rddto.isPetFriendly());
+        driver.getVehicle().setBabyFriendly(rddto.isBabyFriendly());
 
         driver.getVehicle().setBusy(false);
 

@@ -24,6 +24,14 @@ public class RegisterDriverDTO {
 
     private String phone;
 
-    private VehicleDTO vehicle;
+    private String name;
+
+    private String type;
+
+    private boolean petFriendly;
+
+    private boolean babyFriendly;
+
+//    private VehicleDTO vehicle;
 
 }
