@@ -1,10 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { TokenInterface } from './../../model/TokenInterface';
 import { LoginInterface } from './../../model/LoginInterface';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Token } from '@angular/compiler';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -24,19 +25,22 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(private authService : AuthService,private router: Router) { }
+  constructor(private authService : AuthService,private router: Router ,
+    private http : HttpClient, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
   loginWithGoogle(): void {
-    // window.location.href = `http://localhost:8080/auth/login/oauth2/code/google`;
+    window.location.href = `http://localhost:8080/auth/login/oauth2/code/google`;
     window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth' +
     '?client_id=450547483794-u7usqmlhrtr11e0psoef0ghck73sb25u.apps.googleusercontent.com' +
     '&response_type=code' +
     '&scope=openid+email+profile' +
     '&redirect_uri=http://localhost:8080/auth/login/oauth2/code/google'+
     '';
+
+
   }
 
   public login(){

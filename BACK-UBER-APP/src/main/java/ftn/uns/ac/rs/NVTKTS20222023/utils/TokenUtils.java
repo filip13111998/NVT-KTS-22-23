@@ -211,7 +211,7 @@ public class TokenUtils {
      * @param token JWT token.
      * @return Podaci iz tokena.
      */
-    private Claims getAllClaimsFromToken(String token) {
+    public Claims getAllClaimsFromToken(String token) {
         Claims claims;
         try {
             claims = Jwts.parser()

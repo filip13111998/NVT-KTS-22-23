@@ -296,4 +296,18 @@ public class AccountService {
     }
 
 
+    public Boolean saveCitizenByUsername(String username) {
+        Citizen citizen = new Citizen();
+        citizen.setUsername(username);
+
+        Citizen c = cr.findByUsername(username);
+
+        if(c == null){
+            System.out.println("KORISNIK SA USERNAME JE DODATA -> " + username);
+            cr.save(citizen);
+            return true;
+        }
+        System.out.println("KORISNIK SA USERNAME POSTOJI -> " + username);
+        return false;
+    }
 }

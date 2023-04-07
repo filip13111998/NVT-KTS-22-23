@@ -17,12 +17,14 @@ const routes: Routes = [
   {path : '', component:MapComponent},
   {path : 'd3', component:BarChartComponent},
   {path : 'citizen-home', component:CitizenHomeComponent},
+  {path : 'citizen-home/:jwtToken', component:CitizenHomeComponent},
   {path : 'admin-home', component:AdminHomeComponent},
   {path : 'driver-home', component:DriverHomeComponent},
   {path : 'login', component:LoginComponent},
   {path : 'citizen-register', component:CitizenRegisterComponent},
   {path : 'driver-register', component:DriverRegisterComponent},
   {path : 'reset-password', component:ResetPasswordComponent},
+
 ];
 
 @NgModule({

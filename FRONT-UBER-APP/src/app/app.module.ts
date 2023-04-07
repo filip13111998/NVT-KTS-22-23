@@ -25,6 +25,7 @@ import { DriverRegisterComponent } from './components/driver-register/driver-reg
 import { CitizenRegisterComponent } from './components/citizen-register/citizen-register.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     AdminHomeComponent,
     DriverRegisterComponent,
     CitizenRegisterComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+
   ],
   imports: [
     BrowserModule,
