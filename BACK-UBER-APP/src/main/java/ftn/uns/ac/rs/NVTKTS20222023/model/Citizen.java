@@ -1,5 +1,6 @@
 package ftn.uns.ac.rs.NVTKTS20222023.model;
 
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "citizens")
+@Where(clause = "verify = true")
 public class Citizen implements UserDetails {
 
     @Id
@@ -37,14 +39,35 @@ public class Citizen implements UserDetails {
 
     private Long tokens;
 
+    private String comment;
+
     //BLOKIRANJE KORISNIKA
     private boolean block; // ako je true onda je blokiran
+
+    @OneToOne
+    private Ride ride;
 
     @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<Ride> rides = new ArrayList<Ride>();
 
     @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<Ride> favorite = new ArrayList<Ride>();
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Ride getRide() {
+        return ride;
+    }
+
+    public void setRide(Ride ride) {
+        this.ride = ride;
+    }
 
     public Long getId() {
         return id;

@@ -26,4 +26,38 @@ public class Route {
     @ManyToOne
     private Ride ride;
 
+    public Route() {
+    }
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
+    public Long getRouteIndex() {
+        return routeIndex;
+    }
+
+    public void setRouteIndex(Long routeIndex) {
+        this.routeIndex = routeIndex;
+    }
+
+    public Ride getRide() {
+        return ride;
+    }
+
+    public void setRide(Ride ride) {
+        this.ride = ride;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

@@ -3,9 +3,10 @@ package ftn.uns.ac.rs.NVTKTS20222023.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "rides2")
+@Table(name = "rides")
 public class Ride {
 
     @Id
@@ -42,10 +43,7 @@ public class Ride {
 
     private String paid; //SPLIT FIRE USERNAME STRING. EXAMPLE : pera123@gmail.com|zika@hotmail.com...
 
-
-
-    //IS FUTURE RIDE
-    private boolean future;
+    private double price;
 
     //PANIC TASTER. Bilo koji korisnik da pritisne panik ovaj flef se postavlja na true. admin moze kasnije
     //da dobavi sve voznje koje su true i da tako kazni vozaca.
@@ -53,6 +51,7 @@ public class Ride {
 
     //Komentar koji se ostavlja na REJECT voznje. Pre nego sto putnici udju u vozilo vozac odbija voznju i ostavlja komentar opciono.
     private String comment;
+
 
     //DRIVER
     @ManyToOne
@@ -68,6 +67,36 @@ public class Ride {
 
     public Ride(){
 
+    }
+
+    public List<Location> getAllLocations(){
+        return this.getRoutes().stream()
+                .flatMap(r -> r.getLocations().stream())
+                .collect(Collectors.toList());
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isPanic() {
+        return panic;
+    }
+
+    public void setPanic(boolean panic) {
+        this.panic = panic;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public Long getStart() {
@@ -166,13 +195,6 @@ public class Ride {
         this.paid = paid;
     }
 
-    public boolean isFuture() {
-        return future;
-    }
-
-    public void setFuture(boolean future) {
-        this.future = future;
-    }
 
     public Driver getDriver() {
         return driver;

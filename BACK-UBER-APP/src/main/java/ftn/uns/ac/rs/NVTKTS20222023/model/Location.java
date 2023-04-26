@@ -21,6 +21,8 @@ public class Location {
 
     private Double longitude;
 
-    private Double Latitude;
+    private Double latitude;
+
+
 
 }

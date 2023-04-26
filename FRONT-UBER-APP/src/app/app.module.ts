@@ -24,6 +24,8 @@ import { AdminHomeComponent } from './components/admin-home/admin-home.component
 import { DriverRegisterComponent } from './components/driver-register/driver-register.component';
 import { CitizenRegisterComponent } from './components/citizen-register/citizen-register.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { CitizenHomeRoutesViewComponent } from './components/citizen-home-routes-view/citizen-home-routes-view.component';
+import { CitizenHomeRideFormComponent } from './components/citizen-home-ride-form/citizen-home-ride-form.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     DriverRegisterComponent,
     CitizenRegisterComponent,
     ResetPasswordComponent,
+    CitizenHomeRoutesViewComponent,
+    CitizenHomeRideFormComponent,
 
   ],
   imports: [

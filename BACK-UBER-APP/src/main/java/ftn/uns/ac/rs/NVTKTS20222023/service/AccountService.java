@@ -40,6 +40,9 @@ public class AccountService {
     private LocationRepository lr;
 
     @Autowired
+    private LoginHistoryService lhs;
+
+    @Autowired
     private ModelMapper mm;
 
     @Autowired
@@ -91,7 +94,7 @@ public class AccountService {
         driver.getVehicle().setBusy(false);
 
         //SET DEFAULT LATITUDE AND LONGITUDE FOR VEHICLE: 45.252107 - 19.836915
-        Location l = Location.builder().Latitude(45.252107).longitude(19.836915).build();
+        Location l = Location.builder().latitude(45.252107).longitude(19.836915).build();
 
         driver.getVehicle().setLocation(l);
 
@@ -163,6 +166,8 @@ public class AccountService {
     public Boolean logout(String username) {
 
         ChangeDriverStateDTO cdsdto = ChangeDriverStateDTO.builder().username(username).flag(false).build();
+
+        lhs.setLastLogout(username);
 
         Boolean answer = this.changeStateDriver(cdsdto);
 

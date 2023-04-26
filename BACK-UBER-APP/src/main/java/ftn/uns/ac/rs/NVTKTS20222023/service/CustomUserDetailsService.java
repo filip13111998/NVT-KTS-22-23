@@ -3,15 +3,21 @@ package ftn.uns.ac.rs.NVTKTS20222023.service;
 import ftn.uns.ac.rs.NVTKTS20222023.model.Admin;
 import ftn.uns.ac.rs.NVTKTS20222023.model.Citizen;
 import ftn.uns.ac.rs.NVTKTS20222023.model.Driver;
+import ftn.uns.ac.rs.NVTKTS20222023.model.LoginHistory;
 import ftn.uns.ac.rs.NVTKTS20222023.repository.AdminRepository;
 import ftn.uns.ac.rs.NVTKTS20222023.repository.CitizenRepository;
 import ftn.uns.ac.rs.NVTKTS20222023.repository.DriverRepository;
+import ftn.uns.ac.rs.NVTKTS20222023.repository.LoginHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Service
 @Transactional
@@ -23,6 +29,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private CitizenRepository cr;
 
+    @Autowired
+    private LoginHistoryRepository lhr;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //        System.out.println("FIND USER");
@@ -31,6 +40,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (driver != null) {
 //            System.out.println("USAO U DRIVER");
             driver.setActive(true);
+
+            LocalDateTime localDateTime = LocalDateTime.now();
+            ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
+            long millisecondsSinceEpoch = zonedDateTime.toInstant().toEpochMilli();
+            lhr.save(LoginHistory.builder().driver(driver).start(millisecondsSinceEpoch).build());
+
             return driver;
 //            throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         }

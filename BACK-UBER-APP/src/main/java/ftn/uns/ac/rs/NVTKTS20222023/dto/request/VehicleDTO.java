@@ -1,5 +1,6 @@
 package ftn.uns.ac.rs.NVTKTS20222023.dto.request;
 
+import ftn.uns.ac.rs.NVTKTS20222023.model.Location;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,5 @@ public class VehicleDTO {
     private boolean petFriendly;
 
     private boolean babyFriendly;
-
-
 
 }

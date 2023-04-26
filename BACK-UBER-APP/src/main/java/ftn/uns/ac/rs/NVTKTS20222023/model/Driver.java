@@ -34,6 +34,8 @@ public class Driver implements UserDetails {
 
     private String image;
 
+    private String comment;
+
     // RAZLICITO OD CITIZENA
     @OneToOne
     private Vehicle vehicle;
@@ -62,6 +64,15 @@ public class Driver implements UserDetails {
     @OneToMany(mappedBy = "driver" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<Ride> rides = new ArrayList<Ride>();
 
+    @OneToOne
+    private Ride currentRide;
+
+    @OneToOne
+    private Ride futureRide;
+
+
+//    private List<Location> locations = new ArrayList<>();
+
     //Trenutni broj koordinate u ruti na kome ce biti vozilo
     private Integer counter;
 
@@ -69,9 +80,14 @@ public class Driver implements UserDetails {
     @OneToMany(mappedBy = "driver" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<MarkDriver> marks = new ArrayList<MarkDriver>();
 
-    //Atribut se setuje na true kad ima buducu voznju
-    private boolean future;
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -107,6 +123,24 @@ public class Driver implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public Ride getCurrentRide() {
+        return currentRide;
+    }
+
+    public void setCurrentRide(Ride currentRide) {
+        this.currentRide = currentRide;
+    }
+
+    public Ride getFutureRide() {
+        return futureRide;
+    }
+
+    public void setFutureRide(Ride futureRide) {
+        this.futureRide = futureRide;
+    }
+
+
 
     public Long getId() {
         return id;
@@ -268,11 +302,5 @@ public class Driver implements UserDetails {
         this.marks = marks;
     }
 
-    public boolean isFuture() {
-        return future;
-    }
 
-    public void setFuture(boolean future) {
-        this.future = future;
-    }
 }
