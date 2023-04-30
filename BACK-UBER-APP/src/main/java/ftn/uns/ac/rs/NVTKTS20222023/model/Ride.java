@@ -1,5 +1,7 @@
 package ftn.uns.ac.rs.NVTKTS20222023.model;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "rides")
+//@Builder
 public class Ride {
 
     @Id
@@ -52,8 +55,7 @@ public class Ride {
     //Komentar koji se ostavlja na REJECT voznje. Pre nego sto putnici udju u vozilo vozac odbija voznju i ostavlja komentar opciono.
     private String comment;
 
-
-    //DRIVER
+   //DRIVER
     @ManyToOne
     private Driver driver;
 
@@ -74,6 +76,8 @@ public class Ride {
                 .flatMap(r -> r.getLocations().stream())
                 .collect(Collectors.toList());
     }
+
+
 
     public double getPrice() {
         return price;

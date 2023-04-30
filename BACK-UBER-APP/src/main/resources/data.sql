@@ -178,7 +178,7 @@ insert into drivers ( username , password , first_name , last_name , city , phon
 
 --CURRENT RIDE
 INSERT INTO rides(BABY_FRIENDLY,PRICE, COMMENT, END_DATE, METERS, NAME, PAID, PANIC, PET_FRIENDLY, START, STATUS, TYPE, DRIVER_ID)
-VALUES (true,3232, '', DATEDIFF('MS', '1970-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 340, 'voznja posao', '', false, true, DATEDIFF('MS', '1970-01-01 00:00:00', CURRENT_TIMESTAMP()), 'START', 'MINI', 5);
+VALUES (true,3232,'', DATEDIFF('MS', '1970-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 340, 'voznja posao', '', false, true, DATEDIFF('MS', '1970-01-01 00:00:00', CURRENT_TIMESTAMP()), 'START', 'MINI', 5);
 
 --CURRENT RIDE
 UPDATE routes SET ride_id = 1 WHERE id = 1;
@@ -203,3 +203,10 @@ insert into CITIZENS_RIDES(CITIZENS_ID,RIDES_ID)
 --insert into rides(BABY_FRIENDLY,COMMENT,END_DATE,FUTURE,METERS,NAME,PAID,PANIC,PET_FRIENDLY,START,STATUS,TYPE,DRIVER_ID)
 --            values(true,'',CURRENT_TIMESTAMP , false,340 , 'voznja posao' , '',false , true , CURRENT_TIMESTAMP , 'START','MINI',5);
 
+
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ct2' , 'ADMIN' , 'ajde admine' , 695696);
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ADMIN' , 'ct2' , 'evo adminanadsa' , 4567907);
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ct2' , 'ADMIN' , 'vidim sve' , 43678911);
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ct2' , 'ADMIN' , 'sta se radii' , 324679763);
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ct33' , 'ADMIN' , 'odg miii' , 589898);
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('dr5' , 'ADMIN' , 'odg miii' , 589898);

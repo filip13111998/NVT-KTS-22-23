@@ -49,7 +49,6 @@ public class RideService {
         ride.setMeters(rideSaveDTO.getDistance());
         ride.setName(rideSaveDTO.getName());
         ride.setPrice(rideSaveDTO.getPrice());
-
         ride = this.setStartDate(ride , rideSaveDTO.getMinutes());
 
 

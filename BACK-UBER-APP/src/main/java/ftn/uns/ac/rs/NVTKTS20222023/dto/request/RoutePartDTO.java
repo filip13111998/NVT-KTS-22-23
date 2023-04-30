@@ -12,6 +12,6 @@ import java.util.List;
 @Data
 @Builder
 public class RoutePartDTO {
-    private int id;
+    private Long id;
     private List<MarkerDTO> coordinates;
 }

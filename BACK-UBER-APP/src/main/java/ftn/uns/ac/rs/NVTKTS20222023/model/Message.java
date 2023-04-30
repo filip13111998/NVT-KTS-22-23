@@ -1,9 +1,18 @@
 package ftn.uns.ac.rs.NVTKTS20222023.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "messages")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
 public class Message {
 
     @Id
@@ -16,9 +25,9 @@ public class Message {
 
     private String message; //Tekst poruke
 
-    private String type; //BLOCK ili CHAT ili NOTIFICATION
+    //private String type; //BLOCK ili CHAT ili NOTIFICATION
 
-    private boolean answered;// Kada admin odgovori setuje ovo polje na true
+//    private boolean answered;// Kada admin odgovori setuje ovo polje na true
 
     private Long date; //Datum kada je poruka poslata
 

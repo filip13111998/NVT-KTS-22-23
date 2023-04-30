@@ -1,0 +1,6 @@
+<!-- <p>admin-chat-users-list works!</p> -->
+<strong>USERS LIST:</strong>
+<div style="height: 30px;"></div>
+<div *ngFor="let user of this.users">
+  <div style="height: 30px;" (click)="setActive(user)" [ngClass]="{ 'my-class': user === activeUser }">{{user}}</div>
+</div>

@@ -26,6 +26,14 @@ import { CitizenRegisterComponent } from './components/citizen-register/citizen-
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CitizenHomeRoutesViewComponent } from './components/citizen-home-routes-view/citizen-home-routes-view.component';
 import { CitizenHomeRideFormComponent } from './components/citizen-home-ride-form/citizen-home-ride-form.component';
+import { CitizenChatComponent } from './components/citizen-chat/citizen-chat.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { AdminChatUsersListComponent } from './components/admin-chat-users-list/admin-chat-users-list.component';
+import { AdminCitizenChatComponent } from './components/admin-citizen-chat/admin-citizen-chat.component';
+import { AdminDriverChatComponent } from './components/admin-driver-chat/admin-driver-chat.component';
+import { DriverChatComponent } from './components/driver-chat/driver-chat.component';
+import { TestComponent } from './components/test/test.component';
+import { WebSocketAPI } from './websocket/websocket-chat.service';
 
 
 @NgModule({
@@ -45,6 +53,13 @@ import { CitizenHomeRideFormComponent } from './components/citizen-home-ride-for
     ResetPasswordComponent,
     CitizenHomeRoutesViewComponent,
     CitizenHomeRideFormComponent,
+    CitizenChatComponent,
+    ChatComponent,
+    AdminChatUsersListComponent,
+    AdminCitizenChatComponent,
+    AdminDriverChatComponent,
+    DriverChatComponent,
+    TestComponent,
 
   ],
   imports: [
@@ -59,7 +74,7 @@ import { CitizenHomeRideFormComponent } from './components/citizen-home-ride-for
     MatButtonModule,
     MDBBootstrapModule.forRoot(),
   ],
-  providers: [],
+  providers: [WebSocketAPI ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

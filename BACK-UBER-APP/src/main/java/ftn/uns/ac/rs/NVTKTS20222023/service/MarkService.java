@@ -109,11 +109,6 @@ public class MarkService {
             rr.save(ride);
         }
 
-
-
-
-
-
         return true;
     }
 }

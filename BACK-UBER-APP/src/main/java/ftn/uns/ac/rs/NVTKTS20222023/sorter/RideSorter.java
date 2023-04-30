@@ -1,5 +1,6 @@
 package ftn.uns.ac.rs.NVTKTS20222023.sorter;
 
+import ftn.uns.ac.rs.NVTKTS20222023.model.Citizen;
 import ftn.uns.ac.rs.NVTKTS20222023.model.Ride;
 import ftn.uns.ac.rs.NVTKTS20222023.repository.CitizenRepository;
 import ftn.uns.ac.rs.NVTKTS20222023.repository.RideRepository;
@@ -19,7 +20,13 @@ public class RideSorter {
 
     public List<Ride> sortByName(String username){
 
-        List<Ride> rides = cr.findAll().stream().filter(c->c.getUsername().equals(username)).findFirst().get().getRides();
+        Citizen citizen = cr.findByUsername(username);
+
+        if (citizen == null){
+            return null;
+        }
+
+        List<Ride> rides = citizen.getRides();
 
         Collections.sort(rides, new Comparator<Ride>() {
             @Override
@@ -31,7 +38,13 @@ public class RideSorter {
     }
     public List<Ride> sortByStartDate(String username){
 
-        List<Ride> rides = cr.findAll().stream().filter(c->c.getUsername().equals(username)).findFirst().get().getRides();
+        Citizen citizen = cr.findByUsername(username);
+
+        if (citizen == null){
+            return null;
+        }
+
+        List<Ride> rides = citizen.getRides();
 
         Collections.sort(rides, new Comparator<Ride>() {
             @Override
@@ -42,9 +55,15 @@ public class RideSorter {
         return rides;
     }
 
-    public List<Ride> sortByStartEnd(String username){
+    public List<Ride> sortByEndDate(String username){
 
-        List<Ride> rides = cr.findAll().stream().filter(c->c.getUsername().equals(username)).findFirst().get().getRides();
+        Citizen citizen = cr.findByUsername(username);
+
+        if (citizen == null){
+            return null;
+        }
+
+        List<Ride> rides = citizen.getRides();
 
         Collections.sort(rides, new Comparator<Ride>() {
             @Override
@@ -57,7 +76,15 @@ public class RideSorter {
 
     public List<Ride> sortByPrice(String username){
 
-        List<Ride> rides = cr.findAll().stream().filter(c->c.getUsername().equals(username)).findFirst().get().getRides();
+        Citizen citizen = cr.findByUsername(username);
+
+        if (citizen == null){
+            return null;
+        }
+
+        List<Ride> rides = citizen.getRides();
+
+//        List<Ride> rides = cr.findAll().stream().filter(c->c.getUsername().equals(username)).findFirst().get().getRides();
 
         Collections.sort(rides, new Comparator<Ride>() {
             @Override
