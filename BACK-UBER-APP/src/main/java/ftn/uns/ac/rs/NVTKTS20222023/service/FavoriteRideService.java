@@ -37,7 +37,12 @@ public class FavoriteRideService {
             return false;
         }
 
-        citizen.getFavorite().add(ride);
+        if(citizen.getFavorite().contains(ride)){
+            citizen.getFavorite().remove(ride);
+        }
+        else{
+            citizen.getFavorite().add(ride);
+        }
 
         return true;
     }

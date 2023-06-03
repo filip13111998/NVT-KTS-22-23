@@ -14,25 +14,25 @@ insert into admins (username , password , first_name , last_name , city , phone)
 
 --CITIZENS TABLE
 insert into citizens ( username , password , first_name , last_name , city , phone , tokens, verify , block)
-            values ('ct1' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Zarko' , 'Lausevic' , 'Novi Sad' , '171-171',5600 , false, false);
+            values ('c1' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Zarko' , 'Lausevic' , 'Novi Sad' , '171-171',5600 , false, false);
 insert into citizens ( username , password , first_name , last_name , city , phone , tokens, verify , block)
-            values ( 'ct2' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Marko' , 'Lazarevic' , 'Novi Sad' , '666-666',9000 , true, false);
+            values ( 'c2' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Marko' , 'Lazarevic' , 'Novi Sad' , '666-666',9000 , true, false);
 insert into citizens (username , password , first_name , last_name , city , phone , tokens, verify , block)
-            values ('ct33' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Darko' , 'Aleksic' , 'Beograd' , '989-989',12000 , true, false);
+            values ('c33' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Darko' , 'Aleksic' , 'Beograd' , '989-989',12000 , true, false);
 insert into citizens ( username , password , first_name , last_name , city , phone , tokens, verify , block)
-            values ('ct54' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Pavle' , 'Avramovic' , 'Subotica' , '100-000',2000 , true, false);
+            values ('c54' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Pavle' , 'Avramovic' , 'Subotica' , '100-000',2000 , true, false);
 insert into citizens ( username , password , first_name , last_name , city , phone , tokens, verify , block)
-            values ('ct55' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Zivorad' , 'Vasic' , 'Sabac' , '090-777',800 , true, false);
+            values ('c55' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Zivorad' , 'Vasic' , 'Sabac' , '090-777',800 , true, false);
 insert into citizens ( username , password , first_name , last_name , city , phone , tokens, verify , block)
-            values ('ct6' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Mladen' , 'Zejic' , 'Zajecar' , '413-371',100 , true, false);
+            values ('c6' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Mladen' , 'Zejic' , 'Zajecar' , '413-371',100 , true, false);
 insert into citizens (username , password , first_name , last_name , city , phone , tokens, verify , block)
-            values ('ct7' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Zivko' , 'Coklic' , 'Negotin' , '867-867',15600 , true, false);
+            values ('c7' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Zivko' , 'Coklic' , 'Negotin' , '867-867',15600 , true, false);
 insert into citizens ( username , password , first_name , last_name , city , phone , tokens, verify , block)
-            values ('ct77' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Aleksa' , 'Perovic' , 'Bor' , '334-222',45000 , true, false);
+            values ('c77' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Aleksa' , 'Perovic' , 'Bor' , '334-222',45000 , true, false);
 insert into citizens ( username , password , first_name , last_name , city , phone , tokens, verify , block)
-            values ('ct91' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Aleksandar' , 'Lausevic' , 'Bor' , '120-129',4999 , true, false);
+            values ('c91' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Aleksandar' , 'Lausevic' , 'Bor' , '120-129',4999 , true, false);
 insert into citizens ( username , password , first_name , last_name , city , phone , tokens, verify , block)
-            values ('ct99' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Adem' , 'Muratovic' , 'Tutin' , '477-779',3800 , true, false);
+            values ('c99' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Adem' , 'Muratovic' , 'Tutin' , '477-779',3800 , true, false);
 
 --LOCATIONS TABLE
 
@@ -72,6 +72,10 @@ insert into locations ( longitude , latitude)
 insert into locations ( longitude , latitude)
             values (45.256228, 19.834986);
 insert into locations ( longitude , latitude)
+values (45.256228, 19.834986);
+insert into locations ( longitude , latitude)
+values (45.260880, 19.832068);
+insert into locations ( longitude , latitude)
             values (45.260880, 19.832068);
 insert into locations ( longitude , latitude)
             values (45.264324, 19.830179);
@@ -98,7 +102,7 @@ insert into vehicles ( name , type , busy , pet_friendly , baby_friendly , locat
 insert into vehicles ( name , type , busy , pet_friendly , baby_friendly , location_id)
             values ( 'audi a6' , 'CAR' , false , false , true , 3);
 insert into vehicles ( name , type , busy , pet_friendly , baby_friendly , location_id)
-            values ('passat' , 'CAR' , true , true , true , 4);
+            values ('passat' , 'CAR' , false , true , true , 4);
 insert into vehicles ( name , type , busy , pet_friendly , baby_friendly , location_id)
             values ('bmw' , 'CAR' , true , false , true , 5);
 insert into vehicles ( name , type , busy , pet_friendly , baby_friendly , location_id)
@@ -106,7 +110,7 @@ insert into vehicles ( name , type , busy , pet_friendly , baby_friendly , locat
 insert into vehicles ( name , type , busy , pet_friendly , baby_friendly , location_id)
             values ('reno' , 'VAN' , false , true , true , 7);
 insert into vehicles ( name , type , busy , pet_friendly , baby_friendly , location_id)
-            values ('fiat' , 'VAN' , true , false , true , 8);
+            values ('fiat' , 'VAN' , false , false , true , 8);
 insert into vehicles (name , type , busy , pet_friendly , baby_friendly , location_id)
             values ('fiat' , 'MINI' , false , true , true , 9);
 insert into vehicles ( name , type , busy , pet_friendly , baby_friendly , location_id)
@@ -115,6 +119,8 @@ insert into vehicles ( name , type , busy , pet_friendly , baby_friendly , locat
 --ROUTE TABLE(CURRENT)
 insert into routes(route_index)
             values(0);
+insert into routes(route_index)
+values(0);
 insert into routes(route_index)
             values(0);
 
@@ -136,23 +142,27 @@ insert into routes_locations(route_id,locations_id)
 insert into routes_locations(route_id,locations_id)
             values(1 ,16);
 insert into routes_locations(route_id,locations_id)
-            values(2 ,17);
+values(2 ,17);
 insert into routes_locations(route_id,locations_id)
-            values(2 ,18);
+values(2 ,18);
 insert into routes_locations(route_id,locations_id)
-            values(2 ,19);
+            values(3 ,19);
 insert into routes_locations(route_id,locations_id)
-            values(2 ,20);
-
---FUTURE ROUTES LOCATIONS
+            values(3 ,20);
 insert into routes_locations(route_id,locations_id)
             values(3 ,21);
 insert into routes_locations(route_id,locations_id)
             values(3 ,22);
+
+--FUTURE ROUTES LOCATIONS
 insert into routes_locations(route_id,locations_id)
-            values(3 ,23);
+            values(4 ,23);
 insert into routes_locations(route_id,locations_id)
-            values(3 ,24);
+            values(4 ,24);
+insert into routes_locations(route_id,locations_id)
+            values(4 ,25);
+insert into routes_locations(route_id,locations_id)
+            values(4 ,26);
 
 -- DRIVERS TABLE
 insert into drivers ( username , password , first_name , last_name , city , phone , active , edit , block , vehicle_id,counter)
@@ -178,35 +188,39 @@ insert into drivers ( username , password , first_name , last_name , city , phon
 
 --CURRENT RIDE
 INSERT INTO rides(BABY_FRIENDLY,PRICE, COMMENT, END_DATE, METERS, NAME, PAID, PANIC, PET_FRIENDLY, START, STATUS, TYPE, DRIVER_ID)
-VALUES (true,3232,'', DATEDIFF('MS', '1970-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 340, 'voznja posao', '', false, true, DATEDIFF('MS', '1970-01-01 00:00:00', CURRENT_TIMESTAMP()), 'START', 'MINI', 5);
+VALUES (true,3232,'', DATEDIFF('MS', '1970-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 340, 'voznja posao', 'c2', false, true, DATEDIFF('MS', '1970-01-01 00:00:00', CURRENT_TIMESTAMP()), 'START', 'MINI', 5);
 
 --CURRENT RIDE
 UPDATE routes SET ride_id = 1 WHERE id = 1;
 UPDATE routes SET ride_id = 1 WHERE id = 2;
+UPDATE routes SET ride_id = 1 WHERE id = 3;
 
 UPDATE drivers SET current_ride_id = 1 WHERE id = 5;
 
 --FUTURE RIDE
 INSERT INTO rides(BABY_FRIENDLY,PRICE, COMMENT, END_DATE,  METERS, NAME, PAID, PANIC, PET_FRIENDLY, START, STATUS, TYPE, DRIVER_ID)
-VALUES (true,55454, '', DATEDIFF('MS', '1970-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 790, 'voznja next', '', false, true, DATEDIFF('MS', '1970-01-01 00:00:00', CURRENT_TIMESTAMP()), 'PAID', 'CAR', 5);
+VALUES (true,5545, '', DATEDIFF('MS', '1972-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 790, 'voznja next', '', false, true, DATEDIFF('MS', '1972-01-01 00:00:00', CURRENT_TIMESTAMP()), 'PAID', 'CAR', 5);
 
 
-UPDATE routes SET ride_id = 2 WHERE id = 3;
+UPDATE routes SET ride_id = 2 WHERE id = 4;
 
 UPDATE drivers SET future_ride_id = 2 WHERE id = 5;
 
 insert into CITIZENS_RIDES(CITIZENS_ID,RIDES_ID)
         values(2 ,1);
-
+insert into CITIZENS_RIDES(CITIZENS_ID,RIDES_ID)
+values(2 ,2);
 
 --RIDE TABLE
 --insert into rides(BABY_FRIENDLY,COMMENT,END_DATE,FUTURE,METERS,NAME,PAID,PANIC,PET_FRIENDLY,START,STATUS,TYPE,DRIVER_ID)
 --            values(true,'',CURRENT_TIMESTAMP , false,340 , 'voznja posao' , '',false , true , CURRENT_TIMESTAMP , 'START','MINI',5);
 
 
-insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ct2' , 'ADMIN' , 'ajde admine' , 695696);
-insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ADMIN' , 'ct2' , 'evo adminanadsa' , 4567907);
-insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ct2' , 'ADMIN' , 'vidim sve' , 43678911);
-insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ct2' , 'ADMIN' , 'sta se radii' , 324679763);
-insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ct33' , 'ADMIN' , 'odg miii' , 589898);
+insert into CITIZENS_FAVORITE(CITIZEN_ID , FAVORITE_ID) values (2,1);
+
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('c2' , 'ADMIN' , 'ajde admine' , 695696);
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('ADMIN' , 'c2' , 'evo adminanadsa' , 4567907);
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('c2' , 'ADMIN' , 'vidim sve' , 43678911);
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('c2' , 'ADMIN' , 'sta se radii' , 324679763);
+insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('c33' , 'ADMIN' , 'odg miii' , 589898);
 insert into MESSAGES(SENDER,RECEIVER,MESSAGE,DATE) values ('dr5' , 'ADMIN' , 'odg miii' , 589898);

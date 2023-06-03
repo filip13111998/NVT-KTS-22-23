@@ -5,9 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
 public class DriverUpdateDTO {
     private String username;
@@ -21,4 +21,6 @@ public class DriverUpdateDTO {
     private String phone;
 
     private String city;
+
+    private String comment;
 }

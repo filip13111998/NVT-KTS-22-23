@@ -22,4 +22,7 @@ public class RideHistoryTableViewDTO {
 
     private double price;
 
+    private boolean favorite;
+
+    private String user;
 }

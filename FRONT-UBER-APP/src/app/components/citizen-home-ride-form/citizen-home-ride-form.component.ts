@@ -1,8 +1,11 @@
+import { BlockService } from 'src/app/services/block.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { RideSaveInterface } from 'src/app/model/RideSaveInterface';
 import { RoutePartInterface } from 'src/app/model/RoutePartInterface';
+import { RideService } from 'src/app/services/ride.service';
 import { MapService } from 'src/app/shared/map.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-citizen-home-ride-form',
@@ -23,12 +26,15 @@ export class CitizenHomeRideFormComponent {
 
   distance:number = 0;
 
+  isBlock = false;
+
   makeRideForm = new FormGroup({
     name: new FormControl(''),
     pets: new FormControl(''),
     baby: new FormControl(''),
     car_type: new FormControl(''),
     user: new FormControl(''),
+    minutes: new FormControl(''),
   });
 
   userForm = new FormGroup({
@@ -43,16 +49,36 @@ export class CitizenHomeRideFormComponent {
     users:[],
     price : 0,
     distance : 0,
+    minutes:0,
     routePartInterface:[],
   };
 
-  constructor(private mapService: MapService){
+  constructor(private mapService: MapService , private rideService: RideService ,
+    private blockService: BlockService,
+    private router: Router){
+
     this.mapService.routing_controls$.subscribe(data => {
       this.selected_routes = data;
       if(this.selected_routes.length === 0){
         this.total_price = 0;
       }
     });
+
+    this.isCitizenBlock();
+
+  }
+
+  public isCitizenBlock():void{
+    let userToken = localStorage.getItem('user_token');
+
+    if (userToken) {
+      let parsedToken = JSON.parse(atob(userToken.split('.')[1]));
+      let username = parsedToken['sub'];
+      this.blockService.isCitizenBlock(username).subscribe((data:boolean) => {
+        this.isBlock = data;
+      });
+    }
+
   }
 
   public calculate_price(){
@@ -85,14 +111,14 @@ export class CitizenHomeRideFormComponent {
 
     let user  = this.userForm.value.user!;
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // const isValidEmail = emailRegex.test('example@email.com');
+    // // const isValidEmail = emailRegex.test('example@email.com');
 
-    if(!emailRegex.test(user)){
-      this.emailError = 'WRONG MAIL!';
-      return;
-    }
+    // if(!emailRegex.test(user)){
+    //   this.emailError = 'WRONG MAIL!';
+    //   return;
+    // }
 
     this.emailError = '';
 
@@ -112,9 +138,18 @@ export class CitizenHomeRideFormComponent {
   public make_ride(){
     // this.mapService.getRouteParts();
     this.makeRideInterface.distance = this.distance;
-    this.makeRideInterface.price = this.total_price;;
+    this.makeRideInterface.price = this.total_price/1000;
 
     this.makeRideInterface.users = this.users;
+
+    let userToken = localStorage.getItem('user_token');
+
+    if (userToken) {
+      let parsedToken = JSON.parse(atob(userToken.split('.')[1]));
+      let username = parsedToken['sub'];
+      this.makeRideInterface.users = [...this.makeRideInterface.users , username];
+
+    }
 
     this.makeRideInterface.name = this.makeRideForm.value.name!;
 
@@ -126,6 +161,7 @@ export class CitizenHomeRideFormComponent {
     this.makeRideInterface.pets = Boolean(this.makeRideForm.value.pets!);
     this.makeRideInterface.baby = Boolean(this.makeRideForm.value.baby!);
     this.makeRideInterface.car_type = this.makeRideForm.value.car_type!;
+    this.makeRideInterface.minutes = Number(this.makeRideForm.value.minutes!);
 
     // let routePartInterface : RoutePartInterface[] = this.selected_routes.map((e) => {
     //   return {
@@ -138,10 +174,10 @@ export class CitizenHomeRideFormComponent {
 
     let routePartInterface: RoutePartInterface[] = this.selected_routes.map((e) => {
       const coordinates = e._routes[e.myindex].coordinates;
-      const firstCoordinate = { longitude: coordinates[0].lng, latitude: coordinates[0].lat };
-      const lastCoordinate = { longitude: coordinates[coordinates.length - 1].lng, latitude: coordinates[coordinates.length - 1].lat };
+      const firstCoordinate = { latitude: coordinates[0].lng, longitude: coordinates[0].lat };
+      const lastCoordinate = { latitude: coordinates[coordinates.length - 1].lng, longitude: coordinates[coordinates.length - 1].lat };
       const everyFifthCoordinate = coordinates.filter((_:any, index:any) => index % 5 === 0)
-        .map((w:any) => { return { longitude: w.lng, latitude: w.lat } });
+        .map((w:any) => { return { latitude: w.lng, longitude: w.lat } });
       return {
         id: e.myindex,
         coordinates: [firstCoordinate, ...everyFifthCoordinate, lastCoordinate]
@@ -150,11 +186,20 @@ export class CitizenHomeRideFormComponent {
 
     this.makeRideInterface.routePartInterface = routePartInterface;
 
-    console.log('MAKE RIDE BRO');
-    console.log(this.selected_routes);
-    console.log('ENDE');
-    console.log(this.makeRideInterface);
-    console.log('ENDE2');
+    this.rideService.save(this.makeRideInterface).subscribe((data:boolean)=>{
+      if(data){
+        // window.alert('EXTRA!');
+        this.router.navigate(['/' , 'citizen-notification']);
+      }
+      else{
+        window.alert('WRONG!');
+      }
+    });
+    // console.log('MAKE RIDE BRO');
+    // console.log(this.selected_routes);
+    // console.log('ENDE');
+    // console.log(this.makeRideInterface);
+    // console.log('ENDE2');
   }
 
 }

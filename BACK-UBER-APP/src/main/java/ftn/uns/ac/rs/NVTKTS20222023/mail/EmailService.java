@@ -16,7 +16,7 @@ public class EmailService {
     private JavaMailSender javaMailSender;
 
     public void sendEmail(String to, String subject, String body) {
-//        SimpleMailMessage message = new SimpleMailMessage();
+
         MimeMessage mm = javaMailSender.createMimeMessage();
         MimeMessageHelper mmh = new MimeMessageHelper(mm);
 

@@ -1,0 +1,43 @@
+<app-driver-menu></app-driver-menu>
+<div class="card" style="width: 25rem;margin-left: 35%;margin-top: 1%;">
+  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+  <div class="card-body">
+    <b style="margin-left: 35%;">FUTURE RIDE</b>
+    <h5 class="card-title"><b style="margin-left: 45%;">TEXT:</b></h5>
+    <p class="card-text">{{rideNotification.text}}</p>
+    <h5 class="card-title"><b style="margin-left: 45%;">PRICE:</b></h5>
+    <p class="card-text">{{rideNotification.price}}</p>
+    <form [formGroup]="messageForm" style="margin-top: 2em;">
+      <div class="mb-3">
+        <label for="exampleInputMessage" class="form-label"><b>REJECT MESSAGE:</b></label>
+        <input type="text" formControlName="message" class="form-control" id="exampleInputMessage"
+          aria-describedby="usernameHelp">
+
+      </div>
+    </form>
+
+    <div class="container" style="margin-top: 5em;">
+      <div class="row">
+        <div class="col-md-6">
+          <button style="margin-left: 25%;" (click)="acceptRide()" class="btn btn-primary">START</button>
+
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-danger" (click)="rejectRide()">REJECT</button>
+        </div>
+
+      </div>
+    </div>
+    <div *ngIf="start">YOU CAN START RIDE</div>
+    <div style="height: 3em"></div>
+    <!-- <b (click)="rejectRide()" class="btn btn-primary">REJECT</b> -->
+    <b style="margin-left: 25%;">CURRENT RIDE FINISH</b>
+    <div class="card-body">
+      <h5 class="card-title">NAME:</h5>
+      <p class="card-text">{{currentRide.text}}</p>
+      <h5 class="card-title">PRICE:</h5>
+      <p class="card-text">{{currentRide.price}}</p>
+    </div>
+    <button style="margin-left: 35%;" (click)="finishRide()" class="btn btn-success">FINISH</button>
+  </div>
+</div>

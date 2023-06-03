@@ -31,10 +31,13 @@ public class LoginHistoryService {
                 .filter(lh->lh.getDriver().getUsername().equals(username) && lh.getEndDate() == 0)
                 .findFirst();
 
-        LoginHistory lh = loginHistory.get();
-        if(lh == null){
+        if(!loginHistory.isPresent()){
             return false;
         }
+        LoginHistory lh = loginHistory.get();
+//        if(lh == null){
+//            return false;
+//        }
 
         LocalDateTime localDateTime = LocalDateTime.now();
         ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
@@ -54,7 +57,6 @@ public class LoginHistoryService {
             return false;
         }
 
-//        List<LoginHistory> loginHistoryList = lhr.findByDriverOrderByEndDateDesc(driver);
         List<LoginHistory> loginHistoryList = lhr.findAll().stream().filter(lh->lh.getDriver().getUsername().equals(username)).collect(Collectors.toList());
         if(loginHistoryList.size()==0){
             return true;
@@ -73,7 +75,7 @@ public class LoginHistoryService {
                 break; // no need to check older login history entries
             }
         }
-        System.out.println("TOTAL DURATION IS" + totalDuration);
+
         return totalDuration < 8 * 60 * 60 * 1000L; // 8 hours in milliseconds
     }
 

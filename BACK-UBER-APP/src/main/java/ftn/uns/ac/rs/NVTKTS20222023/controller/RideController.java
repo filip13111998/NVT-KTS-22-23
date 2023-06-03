@@ -23,14 +23,15 @@ public class RideController {
     @PostMapping("/ride/save")
     public ResponseEntity<?> saveRide(@RequestBody RideSaveDTO rideSaveDTO) {
         // handle the request and return a response
+
         return ResponseEntity.ok(rs.saveRide(rideSaveDTO));
     }
 
-    @PostMapping("/ride/accept/{username}/{rideid}")
-    public ResponseEntity<?> paidRide(@PathVariable String username , @PathVariable String rideid) {
-        // handle the request and return a response
-        return ResponseEntity.ok(rs.acceptRide(username ,rideid ));
-    }
+//    @PostMapping("/ride/accept/{username}/{rideid}")
+//    public ResponseEntity<?> paidRide(@PathVariable String username , @PathVariable String rideid) {
+//        // handle the request and return a response
+//        return ResponseEntity.ok(rs.acceptRide(username ,rideid ));
+//    }
 
     @GetMapping("/ride/history/{username}")
     public ResponseEntity<?> historyRide(@PathVariable String username ) {
@@ -45,9 +46,11 @@ public class RideController {
     }
 
     @GetMapping("/ride/new/{username}")
-    public ResponseEntity<?> citizenNewRide(@PathVariable String username ) {
+    public ResponseEntity<?> citizenNewRide(@PathVariable("username") String username ) {
         // handle the request and return a response
         return ResponseEntity.ok(rs.citizenNewRide(username));
     }
+
+
 
 }

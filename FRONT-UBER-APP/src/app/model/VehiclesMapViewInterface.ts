@@ -3,8 +3,10 @@ import { MarkerInterface } from "./MarkerInterface";
 
 export interface VehiclesMapViewInterface{
   id:number,
-  licencePlate:string,
-  vehicleType:string,
+  name:string,
+  type:string,
+  petFriendly:boolean,
+  babyFriendly:boolean,
   occupied:boolean,
   location:MarkerInterface,
 //  marker:L.Marker,

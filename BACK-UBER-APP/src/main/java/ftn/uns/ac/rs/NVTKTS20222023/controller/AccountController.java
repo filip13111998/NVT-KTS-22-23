@@ -3,8 +3,11 @@ package ftn.uns.ac.rs.NVTKTS20222023.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ftn.uns.ac.rs.NVTKTS20222023.dto.request.*;
+import ftn.uns.ac.rs.NVTKTS20222023.dto.response.CitizenProfileDTO;
+import ftn.uns.ac.rs.NVTKTS20222023.dto.response.DriverProfileDTO;
 import ftn.uns.ac.rs.NVTKTS20222023.exception.TwoPasswordsNotSameException;
 import ftn.uns.ac.rs.NVTKTS20222023.model.Admin;
+import ftn.uns.ac.rs.NVTKTS20222023.repository.CitizenRepository;
 import ftn.uns.ac.rs.NVTKTS20222023.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 
 //POINT : 2.2
@@ -181,5 +186,36 @@ public class AccountController {
         return ResponseEntity.ok(true);
     }
 
+    @GetMapping("/get-citizen/{username}")
+    public ResponseEntity<CitizenProfileDTO> getCitizenProfile(@PathVariable("username") String username) {
+
+        CitizenProfileDTO profile = as.getCitizenProfile(username);
+
+        return ResponseEntity.ok(profile);
+    }
+
+    @GetMapping("/get-driver/{username}")
+    public ResponseEntity<DriverProfileDTO> getDriverProfile(@PathVariable("username") String username) {
+
+        DriverProfileDTO profile = as.getDriverProfile(username);
+
+        return ResponseEntity.ok(profile);
+    }
+
+    @GetMapping("/get-drivers")
+    public ResponseEntity<List<DriverProfileDTO>> getDriverProfiles() {
+
+        List<DriverProfileDTO> profiles = as.getDriverProfile();
+
+        return ResponseEntity.ok(profiles);
+    }
+
+    @GetMapping("/admin-accept-driver-profile/{username}")
+    public ResponseEntity<Boolean> adminAcceptDriverUpdate(@PathVariable("username") String username) {
+
+        Boolean answer = as.adminAcceptDriverUpdate(username);
+
+        return ResponseEntity.ok(answer);
+    }
 
 }

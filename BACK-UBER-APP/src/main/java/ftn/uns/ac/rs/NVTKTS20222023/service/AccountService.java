@@ -1,6 +1,8 @@
 package ftn.uns.ac.rs.NVTKTS20222023.service;
 
 import ftn.uns.ac.rs.NVTKTS20222023.dto.request.*;
+import ftn.uns.ac.rs.NVTKTS20222023.dto.response.CitizenProfileDTO;
+import ftn.uns.ac.rs.NVTKTS20222023.dto.response.DriverProfileDTO;
 import ftn.uns.ac.rs.NVTKTS20222023.exception.TwoPasswordsNotSameException;
 import ftn.uns.ac.rs.NVTKTS20222023.mail.EmailService;
 import ftn.uns.ac.rs.NVTKTS20222023.model.*;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -158,6 +161,11 @@ public class AccountService {
         Driver driver = dr.findByUsername(cdsdto.getUsername());
 
         driver.setActive(cdsdto.isFlag());
+
+//        dr.save(driver);
+//        driver.getVehicle().setBusy(false);
+//
+//        vr.save(driver.getVehicle());
 
         return true;
 
@@ -304,7 +312,8 @@ public class AccountService {
     public Boolean saveCitizenByUsername(String username) {
         Citizen citizen = new Citizen();
         citizen.setUsername(username);
-
+        citizen.setVerify(true);
+        citizen.setTokens(10000l);
         Citizen c = cr.findByUsername(username);
 
         if(c == null){
@@ -315,4 +324,90 @@ public class AccountService {
         System.out.println("KORISNIK SA USERNAME POSTOJI -> " + username);
         return false;
     }
+
+    public CitizenProfileDTO getCitizenProfile(String username) {
+
+        Citizen citizen = cr.findByUsername(username);
+
+        if(citizen != null){
+            return CitizenProfileDTO.builder()
+                    .username(username)
+                    .password(citizen.getPassword())
+                    .firstName(citizen.getFirstName())
+                    .lastName(citizen.getLastName())
+                    .city(citizen.getCity())
+                    .phone(citizen.getPhone())
+                    .comment(citizen.getComment())
+                    .tokens(citizen.getTokens())
+                    .build();
+        }
+        return CitizenProfileDTO.builder().build();
+    }
+
+    public DriverProfileDTO getDriverProfile(String username) {
+
+        Driver driver = dr.findByUsername(username);
+
+        if(driver != null){
+            return DriverProfileDTO.builder()
+                    .username(username)
+                    .password(driver.getPassword())
+                    .firstName(driver.getFirstName())
+                    .lastName(driver.getLastName())
+                    .city(driver.getCity())
+                    .phone(driver.getPhone())
+                    .comment(driver.getComment())
+                    .build();
+        }
+        return DriverProfileDTO.builder().build();
+
+    }
+
+    public List<DriverProfileDTO> getDriverProfile() {
+
+        List<Driver> drivers = dr.findAll().stream().filter(d->d.isEdit()).collect(Collectors.toList());
+
+        List<DriverProfileDTO> profileDTOS = new ArrayList<>();
+
+        for(Driver driver : drivers){
+            profileDTOS.add(DriverProfileDTO.builder()
+                    .username(driver.getUsername())
+                    .password(driver.getRepassword())
+                    .firstName(driver.getRefirstName())
+                    .lastName(driver.getRelastName())
+                    .city(driver.getRecity())
+                    .phone(driver.getRephone())
+                    .comment(driver.getComment())
+                    .build());
+        }
+
+
+        return profileDTOS;
+
+    }
+
+    public boolean adminAcceptDriverUpdate(String username) {
+        System.out.println("USOO");
+        System.out.println(username);
+        Driver driver = dr.findByUsername(username);
+
+        if(driver != null){
+             driver.setEdit(false);
+             driver.setPassword(driver.getRepassword());
+             driver.setCity(driver.getRecity());
+             driver.setPhone(driver.getRephone());
+             driver.setFirstName(driver.getRefirstName());
+             driver.setLastName(driver.getRelastName());
+
+             dr.save(driver);
+
+             return true;
+        }
+
+
+
+        return false;
+
+    }
+
 }

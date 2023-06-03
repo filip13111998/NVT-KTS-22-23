@@ -8,5 +8,6 @@ export interface RideSaveInterface{
   price : number;
   distance: number;
   users:string[];
+  minutes: number;
   routePartInterface:RoutePartInterface[];
 }

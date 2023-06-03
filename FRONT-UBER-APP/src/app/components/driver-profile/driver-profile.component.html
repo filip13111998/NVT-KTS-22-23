@@ -1,0 +1,45 @@
+<app-driver-menu></app-driver-menu>
+
+<div style="height: 20px;"></div>
+
+<div style="width:20%;text-align: center;margin-left: 40%;margin-top: 2%;">
+
+  <form [formGroup]="profileForm">
+
+
+    <div class="mb-3">
+      <label for="firstNameInput" class="form-label">First Name:</label>
+      <input type="text" formControlName="firstName" class="form-control" id="firstNameInput">
+    </div>
+
+    <div class="mb-3">
+      <label for="lastNameInput" class="form-label">Last Name:</label>
+      <input type="text" formControlName="lastName" class="form-control" id="lastNameInput">
+    </div>
+
+    <div class="mb-3">
+      <label for="passwordInput" class="form-label">Password:</label>
+      <input type="text" formControlName="password" class="form-control" id="passwordInput">
+    </div>
+
+    <div class="mb-3">
+      <label for="cityInput" class="form-label">City:</label>
+      <input type="text" formControlName="city" class="form-control" id="cityInput">
+    </div>
+
+    <div class="mb-3">
+      <label for="phoneInput" class="form-label">Phone:</label>
+      <input type="text" formControlName="phone" class="form-control" id="phoneInput">
+    </div>
+
+    <div class="mb-3">
+      <label for="commentInput" class="form-label">Block Comment:</label>
+      <input type="text" formControlName="comment" class="form-control" id="commentInput">
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="update()" style="margin-top: 1em;">UPDATE</button>
+
+
+  </form>
+
+</div>

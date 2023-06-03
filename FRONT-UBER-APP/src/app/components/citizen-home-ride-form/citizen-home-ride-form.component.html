@@ -35,6 +35,22 @@
       </select>
     </div>
 
+    <div class="form-group">
+      <label for="exampleFormControlSelect4">Minutes</label>
+      <select formControlName="minutes" class="form-control" id="exampleFormControlSelect4">
+        <option>0</option>
+        <option>16</option>
+        <option>45</option>
+        <option>60</option>
+        <option>90</option>
+        <option>120</option>
+        <option>150</option>
+        <option>180</option>
+        <option>210</option>
+        <option>240</option>
+        <option>300</option>
+      </select>
+    </div>
 
   </form>
   <div style="height: 20px;"></div>
@@ -42,17 +58,28 @@
 
 <div style="height: 20px;"></div>
 
-<form [formGroup]="userForm"
+<!-- <form [formGroup]="userForm"
   style="width: 100%;  margin-left: 30%; margin-top: 1%; display: flex; align-items: center;">
-
+  <div class="mb-3"><b>ADD USERS:</b></div>
   <div class="mb-3" style="display: inline-block; margin-right: 10px;">
-    <!-- <label for="exampleInputUser" class="form-label">User</label> -->
+
     <input type="user" formControlName="user" class="form-control" id="exampleInputUser" aria-describedby="userHelp">
   </div>
   <button type="submit" class="btn btn-primary" (click)="add_user()"
     style="margin-top: -1em; display: inline-block;"><b>+</b></button>
 
+</form> -->
+
+<form [formGroup]="userForm"
+  style="width: 100%;  margin-top: 1%; display: flex; flex-direction: column; align-items: center;">
+  <div class="mb-3" style="margin-bottom: 10px;"><b>ADD USERS:</b></div>
+  <div class="mb-3">
+    <!-- <label for="exampleInputUser" class="form-label">User</label> -->
+    <input type="user" formControlName="user" class="form-control" id="exampleInputUser" aria-describedby="userHelp">
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="add_user()">+</button>
 </form>
+
 
 <b style="color: red;">{{emailError}}</b>
 
@@ -66,4 +93,4 @@
 <p *ngIf="total_price > 0"><b>TOTAL PRICE: {{total_price}}</b></p>
 <div><button class="btn btn-warning" (click)="calculate_price()">CALCULATE!</button></div>
 <div style="height: 20px;"></div>
-<div><button class="btn btn-success" (click)="make_ride()">RIDE!</button></div>
+<div><button class="btn btn-success" [disabled]="isBlock" (click)="make_ride()">RIDE!</button></div>

@@ -1,9 +1,11 @@
 package ftn.uns.ac.rs.NVTKTS20222023.service;
 
+import ftn.uns.ac.rs.NVTKTS20222023.dto.response.RideNotificationDTO;
 import ftn.uns.ac.rs.NVTKTS20222023.dto.response.VehicleMapViewDTO;
 import ftn.uns.ac.rs.NVTKTS20222023.model.*;
 import ftn.uns.ac.rs.NVTKTS20222023.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -42,6 +46,12 @@ public class DriverService {
     @Autowired
     private CitizenRepository cr;
 
+    @Autowired
+    private SimpMessagingTemplate template;
+
+    @Autowired
+    private CitizenService cs;
+
     public List<Driver> findAllActiveDrivers() {
 
         //GET ALL AVAILABLE DRIVERS WHICH IS ACTIVE AND NOT BLOCK
@@ -59,28 +69,74 @@ public class DriverService {
     public boolean activeDriversIncrementCounter() {
 
         List<Driver> drivers = this.findAllActiveDrivers();
-        System.out.println("sizeee" + drivers.size());
+
+//        System.out.println("sizeee" + drivers.size());
+
         for(Driver driver : drivers) {
+
             //MZD nije current ride vec fake...proveriti booelan atribut if true onca current inace fejk vozis baki.
             Ride ride = driver.getCurrentRide();
+
             if(ride == null){
+
                 continue;
+
             }
+
+//            ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+//            for (Citizen citizen : ride.getCitizens()) {
+////
+////
+////                executor.execute(() ->
+////                        template.convertAndSend("/topic/citizen/time/" + citizen.getUsername(),
+////                                RideNotificationDTO.builder()
+////                                        .text("VOZNJA - DOLAZK TAXIA")
+////                                        .price(ride.getAllLocations().size() - driver.getCounter())
+////                                        .id(ride.getId())
+////                                        .build())
+////                );
+//                if(ride.getAllLocations().size() - driver.getCounter() == 0){
+//                    executor = Executors.newSingleThreadScheduledExecutor();
+//                    executor.execute(() ->
+//                            template.convertAndSend("/topic/citizen/end/" + citizen.getUsername(),
+//                                    RideNotificationDTO.builder()
+//                                            .text("STIGAO TAXI")
+//                                            .price(0)
+//                                            .id(ride.getId())
+//                                            .build())
+//                    );
+//                }
+//
+//            }
 
             if(driver.getCounter() == ride.getAllLocations().size()){
 
                 if(ride.getStatus().equals("START") || ride.getStatus().equals("FAKE")){
+
                     if(ride.getStatus().equals("FAKE")){
+
+                        rr.delete(driver.getCurrentRide());
+
                         driver.setCurrentRide(null);
+
                         driver.setCounter(0);
+
                     }
+
                     ride.setStatus("END");
+
                 }
+
+//                driver.getVehicle().setBusy(true);
+
+//                vr.save(driver.getVehicle());
 
                 continue;
             }
 
             Location location = ride.getAllLocations().get(driver.getCounter());
+
+            driver.getVehicle().setBusy(true);
 
             driver.setCounter(driver.getCounter()+1);
 
@@ -129,7 +185,9 @@ public class DriverService {
             return false;
         }
 
-        if(driver.getFutureRide() == null || driver.getCurrentRide() != null){
+        System.out.println(driver.getFutureRide() == null);
+        System.out.println(driver.getCurrentRide() != null);
+        if(driver.getFutureRide() == null || driver.getCurrentRide()!= null){
             System.out.println("UDJO");
             return false;
         }
@@ -150,6 +208,8 @@ public class DriverService {
 
     public boolean finishRide(String username) {
 
+        System.out.println("FINISH!!");
+
         Driver driver = dr.findByUsername(username);
 
         Location startLocation = null;
@@ -166,7 +226,10 @@ public class DriverService {
 
         if(driver.getCurrentRide().getStatus().equals("END")){
 
-            startLocation = driver.getCurrentRide().getAllLocations().get(driver.getCurrentRide().getAllLocations().size()-1);
+//            startLocation = driver.getCurrentRide().getAllLocations().get(driver.getCurrentRide().getAllLocations().size()-1);
+//            startLocation = driver.getCurrentRide().getAllLocations().get(0);
+            startLocation = driver.getVehicle().getLocation();;
+            cs.unblockAllCitizensByUsernames(driver.getCurrentRide().getCitizens());
 
             driver.getCurrentRide().setStatus("FINISH");
 
@@ -176,14 +239,36 @@ public class DriverService {
 
             driver.setCounter(0);
 
+            //VEHICLE SET TO FREE
+            driver.getVehicle().setBusy(false);
+
+            vr.save(driver.getVehicle());
+
             dr.save(driver);
         }
 
         //OVDE IDE LOGIKA ZA AUTOMATSKO UCITAVANJE NOVE RUTE..KONKRETNO OVDE UCITAVAM FAKE RIDE I POSLE TOGA.
         if(driver.getFutureRide() != null){
+
             endLocation = driver.getFutureRide().getAllLocations().get(0);
+//            endLocation = driver.getFutureRide().getAllLocations().get(driver.getFutureRide().getAllLocations().size()-1);
+            //VEHICLE SET TO FREE
+            driver.getVehicle().setBusy(true);
+
+            vr.save(driver.getVehicle());
 
             this.makeFakeRide(username , startLocation , endLocation);
+
+            ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+            executor.execute(() ->
+                    template.convertAndSend("/topic/driver/notification/" + driver.getUsername(),
+                            RideNotificationDTO.builder()
+                                    .text("NOVA VOZNJA : " + driver.getFutureRide().getName())
+                                    .price(driver.getFutureRide().getPrice())
+                                    .id(driver.getFutureRide().getId())
+                                    .build())
+            );
+
         }
         return true;
     }
@@ -203,10 +288,12 @@ public class DriverService {
             if(users.size()>0){
                 for(String user : users){
                     Citizen citizen = cr.findByUsername(user);
+                    citizen.setBlock(false);
                     citizen.setTokens((long) (citizen.getTokens() + driver.getFutureRide().getPrice()/users.size()));
                 }
             }
 
+            cs.unblockAllCitizensByUsernames(driver.getFutureRide().getCitizens());
 
             driver.getFutureRide().setStatus("REJECT");
 
@@ -216,6 +303,10 @@ public class DriverService {
 
             driver.setFutureRide(null);
 
+            //VEHICLE SET TO FREE
+            driver.getVehicle().setBusy(false);
+
+            vr.save(driver.getVehicle());
 
         }
 
@@ -226,9 +317,7 @@ public class DriverService {
 
     public boolean makeFakeRide(String username , Location startLocation , Location endLocation) {
 
-        System.out.println("FAKE RIDE");
-        System.out.println("KOORDINATES:::: " + startLocation.getLongitude() + "," + startLocation.getLatitude()
-                + "----" + endLocation.getLongitude() + "," + endLocation.getLatitude());
+        System.out.println(startLocation + ":::::" + endLocation);
 
         Driver driver = dr.findByUsername(username);
 
@@ -249,17 +338,18 @@ public class DriverService {
 
             route.setRide(fakeRide);
 
+            List<Location> locations = findFakeRoute(startLocation , endLocation);
             //1.
-            List<Location> locations = new ArrayList<>();
-            locations.add(Location.builder().longitude(11.1111).latitude(11.1111).build());
-            locations.add(Location.builder().longitude(33.3333).latitude(33.3333).build());
-            locations.add(Location.builder().longitude(55.5555).latitude(55.5555).build());
-            locations.add(Location.builder().longitude(77.7777).latitude(77.7777).build());
-            locations.add(Location.builder().longitude(99.9999).latitude(99.9999).build());
+
+//            locations.add(Location.builder().longitude(11.1111).latitude(11.1111).build());
+//            locations.add(Location.builder().longitude(33.3333).latitude(33.3333).build());
+//            locations.add(Location.builder().longitude(55.5555).latitude(55.5555).build());
+//            locations.add(Location.builder().longitude(77.7777).latitude(77.7777).build());
+//            locations.add(Location.builder().longitude(99.9999).latitude(99.9999).build());
 
             //LAZIRAJ OVO OVDE...napravi listo svojih lokacija...da ne trosis api.
             //2.
-//        route.setLocations(ls.getLocationsForWaypoints(startLocation,endLocation));
+//            locations = ls.getLocationsForWaypointsMapQuest(startLocation,endLocation);
 
             route.setLocations(locations);
 
@@ -270,14 +360,91 @@ public class DriverService {
             driver.setCurrentRide(fakeRide);
 
             lr.saveAll(locations);
+
             routeRepository.save(route);
+
             rr.save(fakeRide);
+
             dr.save(driver);
+
         }
 
         return true;
 
     }
 
+    public List<Location> findFakeRoute(Location startLocation , Location endLocation){
 
+        List<Location> locations = new ArrayList<>();
+
+        int counter = 1;
+
+        while(counter <= 10){
+
+            Location location = new Location();
+
+            if(startLocation.getLongitude()>endLocation.getLongitude()){
+
+                double percent = counter * 10.0; // Calculate the percentage based on the counter (e.g., 10% for counter = 1)
+
+                double longitude = startLocation.getLongitude() - ( (startLocation.getLongitude() - endLocation.getLongitude())/ 100 * percent);
+
+                location.setLongitude(longitude);
+
+            }else{
+
+                double percent = counter * 10.0; // Calculate the percentage based on the counter (e.g., 10% for counter = 1)
+
+                double longitude = startLocation.getLongitude() + (endLocation.getLongitude() - startLocation.getLongitude())/ 100 * percent;
+
+                location.setLongitude(longitude);
+
+            }
+
+            if(startLocation.getLatitude()>endLocation.getLatitude()){
+
+                double percent = counter * 10.0; // Calculate the percentage based on the counter (e.g., 10% for counter = 1)
+
+                double latitude = startLocation.getLatitude() - (startLocation.getLatitude() - endLocation.getLatitude()) / 100* percent;
+
+                location.setLatitude(latitude);
+
+            }else{
+
+                double percent = counter * 10.0; // Calculate the percentage based on the counter (e.g., 10% for counter = 1)
+
+                double latitude = startLocation.getLatitude() + (endLocation.getLatitude() - startLocation.getLatitude() )/ 100 * percent;
+
+                location.setLatitude(latitude);
+
+            }
+
+            locations.add(location);
+
+            counter+=1;
+
+        }
+
+        return locations;
+
+    }
+
+
+    public RideNotificationDTO newRide(String username) {
+
+        Optional<Ride> rideOptional = rr.findAll().stream().filter(r-> r.getDriver().getUsername().equals(username) && r.getStatus().equals("PAID")).findFirst();
+        System.out.println(rideOptional.get().getDriver().getUsername());
+        if(rideOptional.isPresent()){
+
+            Ride ride = rideOptional.get();
+
+            return RideNotificationDTO.builder()
+                    .text("NOVA VOZNJA : " + ride.getName())
+                    .price(ride.getPrice())
+                    .id(ride.getId())
+                    .build();
+        }
+
+        return RideNotificationDTO.builder().build();
+    }
 }

@@ -33,6 +33,7 @@ public class BlockService {
                         .firstName(c.getFirstName())
                         .lastName(c.getLastName())
                         .phone(c.getPhone())
+                        .block(c.isBlock())
                         .build())
                 .collect(Collectors.toList());
 
@@ -48,6 +49,7 @@ public class BlockService {
                         .firstName(c.getFirstName())
                         .lastName(c.getLastName())
                         .phone(c.getPhone())
+                        .block(c.isBlock())
                         .build())
                 .collect(Collectors.toList());
 

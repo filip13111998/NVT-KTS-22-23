@@ -23,4 +23,6 @@ public class CitizenUpdateDTO {
     private String city;
 
     private Long tokens;
+
+    private String comment;
 }

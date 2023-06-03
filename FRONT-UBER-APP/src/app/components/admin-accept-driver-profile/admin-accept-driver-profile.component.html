@@ -1,0 +1,82 @@
+<app-admin-menu></app-admin-menu>
+
+<div style="height: 50px;"></div>
+
+<table mat-table [dataSource]="profiles">
+
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef>
+      USERNAME
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.username}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="password">
+    <th mat-header-cell *matHeaderCellDef>
+      PASSWORD
+    </th>
+    <td mat-cell *matCellDef="let element">{{element.password}} </td>
+  </ng-container>
+
+  <!-- endAction Column -->
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef>
+      FIRST NAME
+    </th>
+    <td mat-cell *matCellDef="let element">{{element.firstName}} </td>
+  </ng-container>
+
+  <!-- endAction Column -->
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef>
+      LAST NAME
+    </th>
+    <td mat-cell *matCellDef="let element">{{element.lastName}} </td>
+  </ng-container>
+
+  <!-- endAction Column -->
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef>
+      CITY
+    </th>
+    <td mat-cell *matCellDef="let element">{{element.city}} </td>
+  </ng-container>
+
+  <!-- endAction Column -->
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef>
+      PHONE
+    </th>
+    <td mat-cell *matCellDef="let element">{{element.phone}} </td>
+  </ng-container>
+
+  <!-- endAction Column -->
+  <ng-container matColumnDef="comment">
+    <th mat-header-cell *matHeaderCellDef>
+      COMMENT
+    </th>
+    <td mat-cell *matCellDef="let element">{{element.comment}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="accept">
+    <th mat-header-cell *matHeaderCellDef>
+      ACCEPT
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <button class="btn btn-success" (click)="accept(element.username)">
+        <!-- {{ element.owner ? 'ACTIVE' : 'INACTIVE' }} -->
+        UPDATE
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div style="height: 20px;"></div>
+
+
+<div style="height: 100px;"></div>

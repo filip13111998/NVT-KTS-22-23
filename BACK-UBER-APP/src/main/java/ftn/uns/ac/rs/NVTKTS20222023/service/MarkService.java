@@ -51,7 +51,10 @@ public class MarkService {
                 )
                 .findFirst();
 
-        Comment comment = optionalComment.get();
+        Comment comment = null;
+        if(optionalComment.isPresent()){
+            comment = optionalComment.get();
+        }
 
         Optional<MarkRide> optionalMarkRide = mrr.findAll().stream()
                 .filter(c ->
@@ -60,7 +63,10 @@ public class MarkService {
                 )
                 .findFirst();
 
-        MarkRide markRide = optionalMarkRide.get();
+        MarkRide markRide = null;
+        if(optionalMarkRide.isPresent()){
+            markRide = optionalMarkRide.get();
+        }
 
         Optional<MarkDriver> optionalMarkDriver = mdr.findAll().stream()
                 .filter(c ->
@@ -69,8 +75,10 @@ public class MarkService {
                 )
                 .findFirst();
 
-        MarkDriver markDriver = optionalMarkDriver.get();
-
+        MarkDriver markDriver = null;
+        if(optionalMarkDriver.isPresent()){
+            markDriver = optionalMarkDriver.get();
+        }
 
         if(!mdto.getRideComment().equals("") && comment != null){
             comment.setComment(mdto.getRideComment());
@@ -102,12 +110,13 @@ public class MarkService {
             MarkDriver newMark = MarkDriver.builder()
                     .citizen(citizen)
                     .driver(ride.getDriver())
-                    .mark(mdto.getRideMark())
+                    .mark(mdto.getDriverMark())
                     .build();
             ride.getDriver().getMarks().add(newMark);
             mdr.save(newMark);
             rr.save(ride);
         }
+
 
         return true;
     }

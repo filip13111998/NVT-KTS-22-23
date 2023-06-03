@@ -13,10 +13,16 @@ export class CitizenHomeComponent {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const token = this.route.snapshot.queryParamMap.get('jwtToken');
+    console.log("EXETUCE");
+    console.log("SN:" + this.route.snapshot);
+    const token = this.route.snapshot.paramMap.get('jwtToken');
     if (token != null){
+      console.log("USOOO");
       this.jwtToken = token;
+      localStorage.setItem('user_token', token);
     }
+
   }
+
 
 }

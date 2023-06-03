@@ -1,0 +1,128 @@
+<div style="height: 20px;"></div>
+
+<div style="width:20%;text-align: center;margin-left: 40%;margin-top: 10%;">
+
+  <form [formGroup]="historyForm">
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">SELECT SORT</label>
+      <select formControlName="sort" class="form-control" id="exampleFormControlSelect1">
+        <option>NAME</option>
+        <option>START</option>
+        <option>END</option>
+        <option>PRICE</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="sort()" style="margin-top: 1em;">SORT</button>
+  </form>
+
+</div>
+
+<div style="height: 20px;"></div>
+
+<table mat-table [dataSource]="histories">
+  <!-- id Column -->
+  <!-- <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container> -->
+
+  <!-- startAction Column -->
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>
+      ID
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.id}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>
+      NAME
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.name}}
+    </td>
+  </ng-container>
+
+
+
+  <ng-container matColumnDef="start">
+    <th mat-header-cell *matHeaderCellDef>
+      START DATE
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.start}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="end">
+    <th mat-header-cell *matHeaderCellDef>
+      END DATE
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.end}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef>
+      PRICE
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.price}}
+    </td>
+  </ng-container>
+
+
+
+  <ng-container matColumnDef="favorite">
+    <th mat-header-cell *matHeaderCellDef>
+      FAVORITE
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngIf="element.favorite; else unblockButton">
+        <button class="btn btn-danger" (click)="favorite(element.id)">REMOVE</button>
+      </ng-container>
+      <ng-template #unblockButton>
+        <button class="btn btn-success" (click)="favorite(element.id)">ADD</button>
+      </ng-template>
+      <!-- <button class="btn btn-success" (click)="block(element.username)">BLOCK USER</button>
+      <button class="btn btn-danger" (click)="block(element.username)">UNBLOCK USER</button> -->
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="detail">
+    <th mat-header-cell *matHeaderCellDef>
+      DETAIL VIEW
+    </th>
+    <td mat-cell *matCellDef="let element">
+
+      <button class="btn btn-primary" (click)="details(element.id)">DEATAIL VIEW</button>
+
+      <!-- <button class="btn btn-success" (click)="block(element.username)">BLOCK USER</button>
+      <button class="btn btn-danger" (click)="block(element.username)">UNBLOCK USER</button> -->
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="mark">
+    <th mat-header-cell *matHeaderCellDef>
+      MARK
+    </th>
+    <td mat-cell *matCellDef="let element">
+
+      <button class="btn btn-success" (click)="mark(element.id)">MARK</button>
+
+      <!-- <button class="btn btn-success" (click)="block(element.username)">BLOCK USER</button>
+      <button class="btn btn-danger" (click)="block(element.username)">UNBLOCK USER</button> -->
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div style="height:100px"></div>

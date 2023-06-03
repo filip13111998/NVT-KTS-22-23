@@ -5,6 +5,7 @@ import ftn.uns.ac.rs.NVTKTS20222023.dto.response.ReportRideDTO;
 import ftn.uns.ac.rs.NVTKTS20222023.dto.response.RideHistoryTableViewDTO;
 import ftn.uns.ac.rs.NVTKTS20222023.service.ReportService;
 import ftn.uns.ac.rs.NVTKTS20222023.service.RideHistoryService;
+import ftn.uns.ac.rs.NVTKTS20222023.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -24,24 +26,27 @@ public class ReportController {
     @Autowired
     private ReportService reportService;
 
-    @GetMapping("/number/{start}/{end}")
-    public ResponseEntity<ReportRideDTO> rideNumber(@PathVariable String start, @PathVariable String end) {
+    @Autowired
+    private TokenUtils tokenUtils;
 
-        return ResponseEntity.ok(reportService.rideNumber(Long.parseLong(start) ,Long.parseLong(end)));
-
-    }
-
-    @GetMapping("/meters/{start}/{end}")
-    public ResponseEntity<ReportRideDTO> rideMeters(@PathVariable String start, @PathVariable String end) {
-
-        return ResponseEntity.ok(reportService.rideMeters(Long.parseLong(start) ,Long.parseLong(end)));
+    @GetMapping("/number/{start}/{end}/{username}/{role}")
+    public ResponseEntity<ReportRideDTO> rideNumber( @PathVariable String start, @PathVariable String end ,  @PathVariable String username ,  @PathVariable String role) {
+        System.out.println("STIGOO");
+        return ResponseEntity.ok(reportService.rideNumber(Long.parseLong(start) ,Long.parseLong(end)  , username , role ));
 
     }
 
-    @GetMapping("/price/{start}/{end}")
-    public ResponseEntity<ReportRideDTO> ridePrice(@PathVariable String start, @PathVariable String end) {
+    @GetMapping("/meters/{start}/{end}/{username}/{role}")
+    public ResponseEntity<ReportRideDTO> rideMeters(@PathVariable String start, @PathVariable String end, @PathVariable String username ,  @PathVariable String role) {
 
-        return ResponseEntity.ok(reportService.ridePrice(Long.parseLong(start) ,Long.parseLong(end)));
+        return ResponseEntity.ok(reportService.rideMeters(Long.parseLong(start) ,Long.parseLong(end), username , role));
+
+    }
+
+    @GetMapping("/price/{start}/{end}/{username}/{role}")
+    public ResponseEntity<ReportRideDTO> ridePrice( @PathVariable String start, @PathVariable String end, @PathVariable String username ,  @PathVariable String role) {
+
+        return ResponseEntity.ok(reportService.ridePrice(Long.parseLong(start) ,Long.parseLong(end) , username , role));
 
     }
 

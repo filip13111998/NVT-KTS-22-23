@@ -1,0 +1,26 @@
+<div style="width:20%;text-align: center;margin-left: 40%;margin-top: 10%;">
+
+  <form [formGroup]="cloneForm">
+    <div class="mb-3">
+      <label for="exampleInputId" class="form-label">ID</label>
+      <input type="id" formControlName="id" class="form-control" id="exampleInputId" aria-describedby="idHelp">
+
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">SELECT MINUTES</label>
+      <select formControlName="minutes" class="form-control" id="exampleFormControlSelect1">
+        <option>0</option>
+        <option>30</option>
+        <option>45</option>
+        <option>60</option>
+        <option>120</option>
+        <option>180</option>
+        <option>240</option>
+        <option>300</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="cloneRide()" style="margin-top: 1em;">CLONE</button>
+  </form>
+
+</div>

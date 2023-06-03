@@ -26,4 +26,6 @@ public class CitizenBlockDTO {
 
     private String phone;
 
+    private boolean block;
+
 }

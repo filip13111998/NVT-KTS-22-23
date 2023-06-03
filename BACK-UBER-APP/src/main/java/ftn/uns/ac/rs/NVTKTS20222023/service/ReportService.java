@@ -22,8 +22,9 @@ public class ReportService {
     @Autowired
     private RideDateSorter rds;
 
-    public ReportRideDTO rideNumber(Long start, Long end) {
-        Map<LocalDate, List<Ride>> map =  rds.sortRidesByDayInterval(start,end);
+    public ReportRideDTO rideNumber(Long start, Long end , String username , String ROLE) {
+
+        Map<LocalDate, List<Ride>> map =  rds.sortRidesByDayInterval(start,end, username , ROLE);
 
         if(map.keySet().size() == 0){
             return null;
@@ -41,7 +42,11 @@ public class ReportService {
             days.add(day);
         }
 
-        long average = sum/map.keySet().size();
+        long average = 0;
+        if (map.keySet().size() != 0){
+            average = sum/map.keySet().size();
+        }
+
 
         return ReportRideDTO.builder()
                 .sumData(sum)
@@ -51,8 +56,8 @@ public class ReportService {
 
     }
 
-    public ReportRideDTO rideMeters(Long start, Long end) {
-        Map<LocalDate, List<Ride>> map =  rds.sortRidesByDayInterval(start,end);
+    public ReportRideDTO rideMeters(Long start, Long end , String username , String ROLE) {
+        Map<LocalDate, List<Ride>> map =  rds.sortRidesByDayInterval(start,end , username , ROLE);
 
         List<DayDTO> days = new ArrayList<>();
 
@@ -71,7 +76,11 @@ public class ReportService {
             days.add(day);
         }
 
-        long average = sum/map.keySet().size();
+        long average = 0;
+        if (map.keySet().size() != 0){
+            average = sum/map.keySet().size();
+        }
+
 
         return ReportRideDTO.builder()
                 .sumData(sum)
@@ -81,8 +90,8 @@ public class ReportService {
 
     }
 
-    public ReportRideDTO ridePrice(Long start, Long end) {
-        Map<LocalDate, List<Ride>> map =  rds.sortRidesByDayInterval(start,end);
+    public ReportRideDTO ridePrice(Long start, Long end , String username , String ROLE) {
+        Map<LocalDate, List<Ride>> map =  rds.sortRidesByDayInterval(start,end , username , ROLE);
 
         List<DayDTO> days = new ArrayList<>();
 
@@ -103,7 +112,10 @@ public class ReportService {
             days.add(day);
         }
 
-        long average = sum/map.keySet().size();
+        long average = 0;
+        if (map.keySet().size() != 0){
+            average = sum/map.keySet().size();
+        }
 
         return ReportRideDTO.builder()
                 .sumData(sum)

@@ -1,0 +1,50 @@
+<app-admin-menu></app-admin-menu>
+<div style="height: 20px;"></div>
+
+<div style="width:20%;text-align: center;margin-left: 40%;margin-top: 2%;">
+
+  <form [formGroup]="reportForm">
+    <div class="mb-3">
+      <label for="startInput" class="form-label">START</label>
+      <input type="text" formControlName="start" class="form-control" id="startInput">
+    </div>
+
+    <div class="mb-3">
+      <label for="endInput" class="form-label">END</label>
+      <input type="text" formControlName="end" class="form-control" id="endInput">
+    </div>
+
+    <b *ngIf="condition" style="color:red">NO DATA FOR USER</b>
+    <div></div>
+    <button type="submit" class="btn btn-primary" (click)="rideReport()" style="margin-top: 1em;">REPORT</button>
+
+
+  </form>
+  <div *ngIf="!condition">
+
+    <div style="height: 20px;"></div>
+    <b>RIDE NUMBERS:</b>
+    <div></div>
+    <b>SUM:</b>{{number.sumData}}
+    <b>AVERAGE:</b>{{number.averageData}}
+
+
+    <div style="height: 20px;"></div>
+    <b>RIDE METERS:</b>
+    <div></div>
+    <b>SUM:</b>{{meters.sumData}}
+    <b>AVERAGE:</b>{{meters.averageData}}
+
+
+    <div style="height: 20px;"></div>
+    <b>RIDE PRICE:</b>
+    <div></div>
+    <b>SUM:</b>{{price.sumData}}
+    <b>AVERAGE:</b>{{price.averageData}}
+
+
+
+    <div id="plotContainer"></div>
+  </div>
+
+</div>

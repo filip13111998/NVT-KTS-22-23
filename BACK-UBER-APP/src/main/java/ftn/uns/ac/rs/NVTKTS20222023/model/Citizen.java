@@ -1,5 +1,9 @@
 package ftn.uns.ac.rs.NVTKTS20222023.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +18,10 @@ import java.util.List;
 @Entity
 @Table(name = "citizens")
 @Where(clause = "verify = true")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
 public class Citizen implements UserDetails {
 
     @Id

@@ -1,0 +1,34 @@
+<div style="height: 20px;"></div>
+
+<div style="width:20%;text-align: center;margin-left: 40%;margin-top: 2%;">
+
+  <form [formGroup]="markForm">
+    <div class="mb-3">
+      <label for="idInput" class="form-label">ID</label>
+      <input type="text" formControlName="rideId" class="form-control" id="idInput">
+    </div>
+
+    <div class="mb-3">
+      <label for="commentInput" class="form-label">COMMENT</label>
+      <input type="text" formControlName="rideComment" class="form-control" id="commentInput">
+    </div>
+
+    <div class="mb-3">
+      <label for="rideMarkInput" class="form-label">RIDE MARK</label>
+      <select formControlName="rideMark" class="form-control" id="rideMarkInput">
+        <option *ngFor="let tip of num" [value]="tip">{{tip}}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="driverMarkInput" class="form-label">DRIVER MARK</label>
+      <select formControlName="driverMark" class="form-control" id="driverMarkInput">
+        <option *ngFor="let tip of num" [value]="tip">{{tip}}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="markRide()" style="margin-top: 1em;">RIDE MARK!</button>
+
+  </form>
+
+</div>

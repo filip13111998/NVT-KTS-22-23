@@ -1,5 +1,9 @@
 package ftn.uns.ac.rs.NVTKTS20222023.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +16,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "drivers")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
 public class Driver implements UserDetails {
 
     //ISTO KO I CITIZEN
