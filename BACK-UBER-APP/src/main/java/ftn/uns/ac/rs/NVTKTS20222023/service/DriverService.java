@@ -56,10 +56,9 @@ public class DriverService {
 
         //GET ALL AVAILABLE DRIVERS WHICH IS ACTIVE AND NOT BLOCK
         List<Driver> availableDrivers = dr.findAll().stream().filter(d-> d.isActive() == true && d.isBlock() == false).collect(Collectors.toList());
-
+        System.out.println(availableDrivers.size());
         availableDrivers = availableDrivers.stream().filter(d->lhs.hasDriverBeenLoggedLowerThan8HoursIn24Hours(d.getUsername())).collect(Collectors.toList());
 
-//        return availableDrivers;
         return availableDrivers;
     }
 
@@ -69,9 +68,7 @@ public class DriverService {
     public boolean activeDriversIncrementCounter() {
 
         List<Driver> drivers = this.findAllActiveDrivers();
-
-//        System.out.println("sizeee" + drivers.size());
-
+        System.out.println(drivers);
         for(Driver driver : drivers) {
 
             //MZD nije current ride vec fake...proveriti booelan atribut if true onca current inace fejk vozis baki.
@@ -83,37 +80,13 @@ public class DriverService {
 
             }
 
-//            ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-//            for (Citizen citizen : ride.getCitizens()) {
-////
-////
-////                executor.execute(() ->
-////                        template.convertAndSend("/topic/citizen/time/" + citizen.getUsername(),
-////                                RideNotificationDTO.builder()
-////                                        .text("VOZNJA - DOLAZK TAXIA")
-////                                        .price(ride.getAllLocations().size() - driver.getCounter())
-////                                        .id(ride.getId())
-////                                        .build())
-////                );
-//                if(ride.getAllLocations().size() - driver.getCounter() == 0){
-//                    executor = Executors.newSingleThreadScheduledExecutor();
-//                    executor.execute(() ->
-//                            template.convertAndSend("/topic/citizen/end/" + citizen.getUsername(),
-//                                    RideNotificationDTO.builder()
-//                                            .text("STIGAO TAXI")
-//                                            .price(0)
-//                                            .id(ride.getId())
-//                                            .build())
-//                    );
-//                }
-//
-//            }
-
             if(driver.getCounter() == ride.getAllLocations().size()){
 
                 if(ride.getStatus().equals("START") || ride.getStatus().equals("FAKE")){
 
                     if(ride.getStatus().equals("FAKE")){
+
+                        System.out.println("DOLAZAK");
 
                         rr.delete(driver.getCurrentRide());
 
@@ -152,8 +125,8 @@ public class DriverService {
 
 
         //GET ALL AVAILABLE DRIVERS WHICH IS ACTIVE AND NOT BLOCK
-       List<Driver> availableDrivers = this.findAllActiveDrivers();
-
+        List<Driver> availableDrivers = this.findAllActiveDrivers();
+//        System.out.println(availableDrivers.size());
         //GET ALL VIECHLES FROM AVAILABLE DRIVERS
         List<Vehicle> vehicles = availableDrivers.stream().map(d -> d.getVehicle()).collect(Collectors.toList());
 
@@ -185,10 +158,10 @@ public class DriverService {
             return false;
         }
 
-        System.out.println(driver.getFutureRide() == null);
-        System.out.println(driver.getCurrentRide() != null);
+//        System.out.println(driver.getFutureRide() == null);
+//        System.out.println(driver.getCurrentRide() != null);
         if(driver.getFutureRide() == null || driver.getCurrentRide()!= null){
-            System.out.println("UDJO");
+//            System.out.println("UDJO");
             return false;
         }
 
@@ -208,8 +181,6 @@ public class DriverService {
 
     public boolean finishRide(String username) {
 
-        System.out.println("FINISH!!");
-
         Driver driver = dr.findByUsername(username);
 
         Location startLocation = null;
@@ -226,9 +197,8 @@ public class DriverService {
 
         if(driver.getCurrentRide().getStatus().equals("END")){
 
-//            startLocation = driver.getCurrentRide().getAllLocations().get(driver.getCurrentRide().getAllLocations().size()-1);
-//            startLocation = driver.getCurrentRide().getAllLocations().get(0);
-            startLocation = driver.getVehicle().getLocation();;
+            startLocation = driver.getVehicle().getLocation();
+
             cs.unblockAllCitizensByUsernames(driver.getCurrentRide().getCitizens());
 
             driver.getCurrentRide().setStatus("FINISH");
@@ -251,6 +221,7 @@ public class DriverService {
         if(driver.getFutureRide() != null){
 
             endLocation = driver.getFutureRide().getAllLocations().get(0);
+
 //            endLocation = driver.getFutureRide().getAllLocations().get(driver.getFutureRide().getAllLocations().size()-1);
             //VEHICLE SET TO FREE
             driver.getVehicle().setBusy(true);
@@ -433,7 +404,7 @@ public class DriverService {
     public RideNotificationDTO newRide(String username) {
 
         Optional<Ride> rideOptional = rr.findAll().stream().filter(r-> r.getDriver().getUsername().equals(username) && r.getStatus().equals("PAID")).findFirst();
-        System.out.println(rideOptional.get().getDriver().getUsername());
+
         if(rideOptional.isPresent()){
 
             Ride ride = rideOptional.get();

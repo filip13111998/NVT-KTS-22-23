@@ -48,6 +48,7 @@ public class RideService {
     @Autowired
     private CitizenService cs;
 
+
     public Boolean saveRide(RideSaveDTO rideSaveDTO) {
 
         Ride Ride = createBasicRide(rideSaveDTO);
@@ -66,6 +67,10 @@ public class RideService {
     public Ride createBasicRide(RideSaveDTO rideSaveDTO){
 
         Ride ride = new Ride();
+
+        if(rideSaveDTO == null){
+            return null;
+        }
 
         ride.setPetFriendly(rideSaveDTO.isPets());
 
@@ -222,11 +227,11 @@ public class RideService {
 
         Optional<Ride> r = rr.findById(id);
 
-        Ride ride = r.get();
-
-        if (ride == null) {
+        if(r.isEmpty()){
             return false;
         }
+
+        Ride ride = r.get();
 
         if(ride.getPaid() == ""){
             ride.setPaid(username);
@@ -237,6 +242,7 @@ public class RideService {
         }
 
         if(ride.getPaid().split("\\|").length == ride.getCitizens().size()){
+            System.out.println("PROBLEM");
             return findDriver(id);
         }
 
@@ -246,45 +252,42 @@ public class RideService {
     public boolean findDriver(Long id) {
 
         Optional<Ride> r = rr.findById(id);
+        System.out.println("ULAZ");
+        if(r.isEmpty()){
+            System.out.println("isEmpty");
+            return false;
+        }
 
         Ride ride = r.get();
 
         if(isRideExpired(ride)){
-
+            System.out.println("isRideExpired");
             return false;
 
         }
 
-//        List<Driver> drivers = ds.findAllActiveDrivers().stream()
-//                .filter(
-//                        driver ->
-//                                driver.getVehicle().isBabyFriendly() == ride.isBabyFriendly() &&
-//                                driver.getVehicle().isPetFriendly() == ride.isPetFriendly() &&
-//                                driver.getVehicle().getType() == ride.getType()
-//                )
-//                .collect(Collectors.toList());
         List<Driver> drivers = filterDriversForRide(ride);
 
         if(drivers.size() == 0){
-
+            System.out.println("drivers.size() == 0)");
             ride.setStatus("REJCET");
 
             rr.save(ride);
 
             cs.unblockAllCitizensByUsernames(ride.getCitizens());
-
+            System.out.println("IZLAZ");
             return false;
 
         }
 
         if(this.isAllDriversBusy(drivers)){
-
+            System.out.println("isAllDriversBusy");
             ride.setStatus("REJCET");
 
             rr.save(ride);
 
             cs.unblockAllCitizensByUsernames(ride.getCitizens());
-
+            System.out.println("IZLAZ");
             return false;
 
         }
@@ -298,9 +301,11 @@ public class RideService {
                     .min(Comparator.comparingDouble(d -> ls.getDistance(d.getVehicle().getLocation() ,ride.getAllLocations().get(0) )))
                     .orElse(null);
 
+            System.out.println("CLOSEST");
+            System.out.println(closestDriver == null);
+
             if(closestDriver != null){
-//                assignDriverToRide(ride, closestDriver);
-//                completeRide(ride, closestDriver);
+
                 ride.setStatus("PAID");
 //
                 ride.setDriver(closestDriver);
@@ -325,18 +330,21 @@ public class RideService {
                                         .id(ride.getId())
                                         .build())
                 );
-
+                System.out.println("IZLAZ");
                 return true;
             }
 
         }
+
         List<Driver> futureDrivers = this.getAllFutureFreeDrivers(drivers);
+
         if(futureDrivers.size()>0){
             System.out.println("USO u FUTURE RIDE");
             //izaberi najblizeg iz liste futureDrivers
             Driver closestDriver = drivers.stream()
                     .min(Comparator.comparingInt(d -> d.getCurrentRide().getAllLocations().size()-d.getCounter()))
                     .orElse(null);
+
             if(closestDriver != null){
 
                 ride.setStatus("PAID");
@@ -357,22 +365,14 @@ public class RideService {
                                         .id(ride.getId())
                                         .build())
                 );
-
+                System.out.println("IZLAZ");
                 return true;
             }
 
         }
-
+        System.out.println("KRAJJ");
         return false;
     }
-
-
-//    public void rejectRide(Ride ride) {
-//        ride.setStatus("REJECT");
-//        rr.save(ride);
-//    }
-
-
 
     public boolean isRideExpired(Ride ride) {
         long timeDifference = ride.getStart() - (new Date()).getTime();
@@ -393,6 +393,10 @@ public class RideService {
 
         Optional<Ride> r = rr.findById(id);
 
+        if(r.isEmpty()){
+            return false;
+        }
+
         Ride ride = r.get();
 
         List<Citizen> citizens = ride.getCitizens().stream()
@@ -407,13 +411,15 @@ public class RideService {
 
             rr.save(ride);
 
-            Driver driver = dr.findById(driverId).orElse(null);
+            Optional<Driver> driverOptional = dr.findById(driverId);
 
-            if(driver == null){
+            if(driverOptional.isEmpty()){
 
                 return false;
 
             }
+
+            Driver driver = driverOptional.get();
 
             driver.setFutureRide(null);
 
@@ -490,9 +496,9 @@ public class RideService {
 
     public boolean inCitizenList(List<Citizen> citizens,String username){
 
-        Citizen citizen = citizens.stream().filter(c->c.getUsername().equals(username)).findFirst().get();
+        Optional<Citizen> citizenOptional = citizens.stream().filter(c->c.getUsername().equals(username)).findFirst();
 
-        if(citizen != null){
+        if(citizenOptional.isPresent()){
 
             return true;
 
