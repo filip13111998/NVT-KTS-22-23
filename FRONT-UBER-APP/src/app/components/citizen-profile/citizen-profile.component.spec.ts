@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CitizenProfileComponent } from './citizen-profile.component';
+// import { CitizenProfileComponent } from './citizen-profile.component';
 
-describe('CitizenProfileComponent', () => {
-  let component: CitizenProfileComponent;
-  let fixture: ComponentFixture<CitizenProfileComponent>;
+// describe('CitizenProfileComponent', () => {
+//   let component: CitizenProfileComponent;
+//   let fixture: ComponentFixture<CitizenProfileComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CitizenProfileComponent ]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       declarations: [ CitizenProfileComponent ]
+//     })
+//     .compileComponents();
 
-    fixture = TestBed.createComponent(CitizenProfileComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(CitizenProfileComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

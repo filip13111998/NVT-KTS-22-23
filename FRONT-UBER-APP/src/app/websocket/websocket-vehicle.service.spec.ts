@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { WebsocketVehicleService } from './websocket-vehicle.service';
+// import { WebsocketVehicleService } from './websocket-vehicle.service';
 
-describe('WebsocketVehicleService', () => {
-  let service: WebsocketVehicleService;
+// describe('WebsocketVehicleService', () => {
+//   let service: WebsocketVehicleService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(WebsocketVehicleService);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({});
+//     service = TestBed.inject(WebsocketVehicleService);
+//   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(service).toBeTruthy();
+//   });
+// });

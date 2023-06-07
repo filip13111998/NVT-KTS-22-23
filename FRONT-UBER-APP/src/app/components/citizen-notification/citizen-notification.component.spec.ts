@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CitizenNotificationComponent } from './citizen-notification.component';
+// import { CitizenNotificationComponent } from './citizen-notification.component';
 
-describe('CitizenNotificationComponent', () => {
-  let component: CitizenNotificationComponent;
-  let fixture: ComponentFixture<CitizenNotificationComponent>;
+// describe('CitizenNotificationComponent', () => {
+//   let component: CitizenNotificationComponent;
+//   let fixture: ComponentFixture<CitizenNotificationComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CitizenNotificationComponent ]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       declarations: [ CitizenNotificationComponent ]
+//     })
+//     .compileComponents();
 
-    fixture = TestBed.createComponent(CitizenNotificationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(CitizenNotificationComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

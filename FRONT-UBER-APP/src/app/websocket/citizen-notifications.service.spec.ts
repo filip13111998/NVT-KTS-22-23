@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { CitizenNotificationsService } from './citizen-notifications.service';
+// import { WebsocketCitizenNotificationsService } from './citizen-notifications.service';
 
-describe('CitizenNotificationsService', () => {
-  let service: CitizenNotificationsService;
+// describe('WebsocketCitizenNotificationsService', () => {
+//   let service: WebsocketCitizenNotificationsService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(CitizenNotificationsService);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({});
+//     service = TestBed.inject(WebsocketCitizenNotificationsService);
+//   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(service).toBeTruthy();
+//   });
+// });

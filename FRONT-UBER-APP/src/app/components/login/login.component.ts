@@ -1,11 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { TokenInterface } from './../../model/TokenInterface';
 import { LoginInterface } from './../../model/LoginInterface';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { Token } from '@angular/compiler';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -25,8 +23,7 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(private authService : AuthService,private router: Router ,
-    private http : HttpClient, private route:ActivatedRoute) { }
+  constructor(private authService : AuthService,private router: Router) { }
 
   ngOnInit(): void {
   }

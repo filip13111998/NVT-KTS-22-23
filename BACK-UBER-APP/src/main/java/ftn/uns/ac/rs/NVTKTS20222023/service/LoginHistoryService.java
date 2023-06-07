@@ -51,6 +51,7 @@ public class LoginHistoryService {
     }
 
     public boolean hasDriverBeenLoggedLowerThan8HoursIn24Hours(String username) {
+
         Driver driver = dr.findByUsername(username);
         if (driver == null) {
             // handle the case where the driver does not exist

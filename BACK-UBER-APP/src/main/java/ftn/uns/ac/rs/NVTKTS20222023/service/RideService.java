@@ -242,7 +242,6 @@ public class RideService {
         }
 
         if(ride.getPaid().split("\\|").length == ride.getCitizens().size()){
-            System.out.println("PROBLEM");
             return findDriver(id);
         }
 
@@ -252,16 +251,16 @@ public class RideService {
     public boolean findDriver(Long id) {
 
         Optional<Ride> r = rr.findById(id);
-        System.out.println("ULAZ");
+
         if(r.isEmpty()){
-            System.out.println("isEmpty");
+
             return false;
         }
 
         Ride ride = r.get();
 
         if(isRideExpired(ride)){
-            System.out.println("isRideExpired");
+
             return false;
 
         }
@@ -269,25 +268,25 @@ public class RideService {
         List<Driver> drivers = filterDriversForRide(ride);
 
         if(drivers.size() == 0){
-            System.out.println("drivers.size() == 0)");
+
             ride.setStatus("REJCET");
 
             rr.save(ride);
 
             cs.unblockAllCitizensByUsernames(ride.getCitizens());
-            System.out.println("IZLAZ");
+
             return false;
 
         }
 
         if(this.isAllDriversBusy(drivers)){
-            System.out.println("isAllDriversBusy");
+
             ride.setStatus("REJCET");
 
             rr.save(ride);
 
             cs.unblockAllCitizensByUsernames(ride.getCitizens());
-            System.out.println("IZLAZ");
+
             return false;
 
         }
@@ -301,15 +300,12 @@ public class RideService {
                     .min(Comparator.comparingDouble(d -> ls.getDistance(d.getVehicle().getLocation() ,ride.getAllLocations().get(0) )))
                     .orElse(null);
 
-            System.out.println("CLOSEST");
-            System.out.println(closestDriver == null);
-
             if(closestDriver != null){
 
                 ride.setStatus("PAID");
-//
+
                 ride.setDriver(closestDriver);
-//
+
                 closestDriver.setFutureRide(ride);
 
                 //make fake ride
@@ -330,7 +326,7 @@ public class RideService {
                                         .id(ride.getId())
                                         .build())
                 );
-                System.out.println("IZLAZ");
+
                 return true;
             }
 
@@ -339,7 +335,7 @@ public class RideService {
         List<Driver> futureDrivers = this.getAllFutureFreeDrivers(drivers);
 
         if(futureDrivers.size()>0){
-            System.out.println("USO u FUTURE RIDE");
+
             //izaberi najblizeg iz liste futureDrivers
             Driver closestDriver = drivers.stream()
                     .min(Comparator.comparingInt(d -> d.getCurrentRide().getAllLocations().size()-d.getCounter()))
@@ -365,12 +361,12 @@ public class RideService {
                                         .id(ride.getId())
                                         .build())
                 );
-                System.out.println("IZLAZ");
+
                 return true;
             }
 
         }
-        System.out.println("KRAJJ");
+
         return false;
     }
 

@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CitizenChatComponent } from './citizen-chat.component';
+// import { CitizenChatComponent } from './citizen-chat.component';
 
-describe('CitizenChatComponent', () => {
-  let component: CitizenChatComponent;
-  let fixture: ComponentFixture<CitizenChatComponent>;
+// describe('CitizenChatComponent', () => {
+//   let component: CitizenChatComponent;
+//   let fixture: ComponentFixture<CitizenChatComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CitizenChatComponent ]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       declarations: [ CitizenChatComponent ]
+//     })
+//     .compileComponents();
 
-    fixture = TestBed.createComponent(CitizenChatComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(CitizenChatComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

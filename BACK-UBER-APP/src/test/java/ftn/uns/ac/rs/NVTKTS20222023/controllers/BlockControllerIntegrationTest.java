@@ -33,8 +33,8 @@ public class BlockControllerIntegrationTest {
     public void getAllCitizensAPI() throws Exception {
         // Perform the request and validate the response
         //{"username":"c2","firstName":"Marko","lastName":"Lazarevic","city":"Novi Sad","phone":"666-666","block":false}
-        String expected = "{\"username\":\"c2\",\"firstName\":\"Marko\",\"lastName\":\"Lazarevic\",\"city\":\"Novi Sad\",\"phone\":\"666-666\",\"block\":false}";
-        String expectedJson = "{\"username\":\"c2\",\"firstName\":\"Marko\",\"lastName\":\"Lazarevic\",\"city\":\"Novi Sad\",\"phone\":\"666-666\",\"block\":false}";
+//        String expected = "{\"username\":\"c2\",\"firstName\":\"Marko\",\"lastName\":\"Lazarevic\",\"city\":\"Novi Sad\",\"phone\":\"666-666\",\"block\":false}";
+//        String expectedJson = "{\"username\":\"c2\",\"firstName\":\"Marko\",\"lastName\":\"Lazarevic\",\"city\":\"Novi Sad\",\"phone\":\"666-666\",\"block\":false}";
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/api/block/citizens")

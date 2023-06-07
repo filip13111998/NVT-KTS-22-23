@@ -56,7 +56,7 @@ public class DriverService {
 
         //GET ALL AVAILABLE DRIVERS WHICH IS ACTIVE AND NOT BLOCK
         List<Driver> availableDrivers = dr.findAll().stream().filter(d-> d.isActive() == true && d.isBlock() == false).collect(Collectors.toList());
-        System.out.println(availableDrivers.size());
+
         availableDrivers = availableDrivers.stream().filter(d->lhs.hasDriverBeenLoggedLowerThan8HoursIn24Hours(d.getUsername())).collect(Collectors.toList());
 
         return availableDrivers;
@@ -68,7 +68,7 @@ public class DriverService {
     public boolean activeDriversIncrementCounter() {
 
         List<Driver> drivers = this.findAllActiveDrivers();
-        System.out.println(drivers);
+
         for(Driver driver : drivers) {
 
             //MZD nije current ride vec fake...proveriti booelan atribut if true onca current inace fejk vozis baki.
@@ -85,8 +85,6 @@ public class DriverService {
                 if(ride.getStatus().equals("START") || ride.getStatus().equals("FAKE")){
 
                     if(ride.getStatus().equals("FAKE")){
-
-                        System.out.println("DOLAZAK");
 
                         rr.delete(driver.getCurrentRide());
 
@@ -287,8 +285,6 @@ public class DriverService {
     }
 
     public boolean makeFakeRide(String username , Location startLocation , Location endLocation) {
-
-        System.out.println(startLocation + ":::::" + endLocation);
 
         Driver driver = dr.findByUsername(username);
 
