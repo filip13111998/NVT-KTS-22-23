@@ -21,6 +21,7 @@ export class CitizenHomeRoutesViewComponent {
   totalLength: number = 0;
 
   constructor(private mapService : MapService,private renderer: Renderer2){
+
     this.mapService.route_parts_subscriber$.subscribe(data => {
       this.routePartExtendInterface = [];
       // console.log('DATA IS ' + data.length)
@@ -29,6 +30,7 @@ export class CitizenHomeRoutesViewComponent {
       this.setTotalLength();
     });
   }
+
 
   onDivClick(id: string) {
     // console.log(`Clicked div with id: ${id}`);

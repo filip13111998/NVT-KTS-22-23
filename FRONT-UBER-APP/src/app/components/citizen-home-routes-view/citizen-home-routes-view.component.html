@@ -1,10 +1,11 @@
 <!-- <button class="btn btn-danger" (click)="delete_location_markers()">DELETE MARKERS</button> -->
 <!-- route.id.split('_')[2]==='0' -->
+
 <div><button class="btn btn-danger" (click)="delete_location_markers()">DELETE
     MARKERS</button></div>
 <div>
-  <div *ngFor="let route of this.routePartExtendInterface" (click)="onDivClick(route.id)" [id]="route.id"
-    [ngClass]="{'selected': route.selected}">
+  <div id="routes-lists" *ngFor="let route of this.routePartExtendInterface" (click)="onDivClick(route.id)"
+    [id]="route.id" [ngClass]="{'selected': route.selected}">
     <p>NAME: {{ route.name }} </p>
     <p><span style="color:aqua">LENGTH: {{ route.length }}</span><span style="color: chartreuse;"> TIME:{{ route.time
         }}</span></p>

@@ -28,6 +28,8 @@ export class CitizenHomeRideFormComponent {
 
   isBlock = false;
 
+  noDriver = false;
+
   makeRideForm = new FormGroup({
     name: new FormControl(''),
     pets: new FormControl(''),
@@ -186,13 +188,20 @@ export class CitizenHomeRideFormComponent {
 
     this.makeRideInterface.routePartInterface = routePartInterface;
 
+    if(routePartInterface.length === 0){
+      this.noDriver = true;
+      return;
+    }
+
     this.rideService.save(this.makeRideInterface).subscribe((data:boolean)=>{
       if(data){
         // window.alert('EXTRA!');
+        this.noDriver = false;
         this.router.navigate(['/' , 'citizen-notification']);
       }
       else{
-        window.alert('WRONG!');
+        // window.alert('WRONG!');
+        this.noDriver = true;
       }
     });
     // console.log('MAKE RIDE BRO');

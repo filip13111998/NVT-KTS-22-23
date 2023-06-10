@@ -11,9 +11,16 @@
       <label for="exampleInputPassword" class="form-label">Password</label>
       <input type="password" formControlName="password" class="form-control" id="exampleInputPassword">
     </div>
-    <button (click)="loginWithGoogle()">Sign in with Google</button>
-    <a class="nav-link waves-light" [routerLink]="['/','reset-password']" mdbWavesEffect>Do you forgot password?</a>
-    <button type="submit" class="btn btn-primary" (click)="login()" style="margin-top: 1em;">Login</button>
+
+    <div class="mb-3">
+      <b id="wrong" *ngIf="loginFlag" style="color: red;" class="form-label">WRONG CREDENTIALS!</b>
+    </div>
+
+    <button id="google-button" (click)="loginWithGoogle()">Sign in with Google</button>
+    <a id="forgot-button" class="nav-link waves-light" [routerLink]="['/','reset-password']" mdbWavesEffect>Do you
+      forgot password?</a>
+    <button id="login-button" type="submit" class="btn btn-primary" (click)="login()"
+      style="margin-top: 1em;">Login</button>
   </form>
 
 </div>

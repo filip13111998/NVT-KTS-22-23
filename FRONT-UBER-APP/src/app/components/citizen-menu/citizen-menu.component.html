@@ -38,8 +38,8 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link waves-light" [routerLink]="['/','citizen-notification']" mdbWavesEffect> <button
-            class="nav-item" style="border: 0;background-color: #4f96d8;color: white;"
+        <a id="notification-link" class="nav-link waves-light" [routerLink]="['/','citizen-notification']"
+          mdbWavesEffect> <button class="nav-item" style="border: 0;background-color: #4f96d8;color: white;"
             type="button">NOTIFICATION</button></a>
       </li>
 
@@ -59,8 +59,8 @@
     <ul class="navbar-nav ml-auto nav-flex-icons" style="position: absolute; right: 1em;">
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/','login']">
-          <button class="nav-item" style="border: 0;background-color: #4f96d8;color: white;" type="button"><i
-              (click)="logout()" class="fa fa-sign-out  fa-2x" aria-hidden="true"></i></button>
+          <button id="logout-button" class="nav-item" style="border: 0;background-color: #4f96d8;color: white;"
+            type="button"><i (click)="logout()" class="fa fa-sign-out  fa-2x" aria-hidden="true"></i></button>
         </a>
       </li>
 

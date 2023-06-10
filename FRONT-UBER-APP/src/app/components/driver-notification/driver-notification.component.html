@@ -4,7 +4,7 @@
   <div class="card-body">
     <b style="margin-left: 35%;">FUTURE RIDE</b>
     <h5 class="card-title"><b style="margin-left: 45%;">TEXT:</b></h5>
-    <p class="card-text">{{rideNotification.text}}</p>
+    <p class="card-text" id="future-text">{{rideNotification.text}}</p>
     <h5 class="card-title"><b style="margin-left: 45%;">PRICE:</b></h5>
     <p class="card-text">{{rideNotification.price}}</p>
     <form [formGroup]="messageForm" style="margin-top: 2em;">
@@ -34,10 +34,10 @@
     <b style="margin-left: 25%;">CURRENT RIDE FINISH</b>
     <div class="card-body">
       <h5 class="card-title">NAME:</h5>
-      <p class="card-text">{{currentRide.text}}</p>
+      <p class="card-text" id="current-text">{{currentRide.text}}</p>
       <h5 class="card-title">PRICE:</h5>
       <p class="card-text">{{currentRide.price}}</p>
     </div>
-    <button style="margin-left: 35%;" (click)="finishRide()" class="btn btn-success">FINISH</button>
+    <button id="finish-button" style="margin-left: 35%;" (click)="finishRide()" class="btn btn-success">FINISH</button>
   </div>
 </div>

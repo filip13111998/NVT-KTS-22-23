@@ -12,6 +12,8 @@ import {  Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  loginFlag = false;
+
   loginForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
@@ -50,6 +52,7 @@ export class LoginComponent {
 
     this.authService.login(this.loginInterface).subscribe(
       (tkn: TokenInterface) => {
+        console.log('wrong')
         localStorage.setItem('user_token',tkn.accessToken)
 
         console.log(tkn.accessToken);
@@ -72,6 +75,17 @@ export class LoginComponent {
         }
 
       },
+      (error: any) => {
+        // Handle error here
+        console.log('Login error', error);
+        if (error.status === 401) {
+          // Unauthorized error handling
+          this.loginFlag = true
+          console.log('Unauthorized error');
+        } else {
+          // Other error handling
+        }
+      }
     )
     console.log('sent user');
 
