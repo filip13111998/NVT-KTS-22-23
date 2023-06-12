@@ -178,13 +178,13 @@ insert into drivers ( username , password , first_name , last_name , city , phon
 insert into drivers ( username , password , first_name , last_name , city , phone , active , edit , block , vehicle_id,counter)
             values ('dr6' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Aleksa' , 'Tolic' , 'Kragujevac' , '399-399',true , false , false , 6,0);
 insert into drivers ( username , password , first_name , last_name , city , phone , active , edit , block , vehicle_id,counter)
-            values ('dr7' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Vuk' , 'Keric' , 'Cacak' , '994-993',false , false , false , 7,0);
+            values ('dr7' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Vuk' , 'Keric' , 'Cacak' , '994-993',true , false , false , 7,0);
 insert into drivers ( username , password , first_name , last_name , city , phone , active , edit , block , vehicle_id,counter)
-            values ('dr8' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Nemanja' , 'Mamovic' , 'Lubovija' , '109-901',false , false , false , 8,0);
+            values ('dr8' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Nemanja' , 'Mamovic' , 'Lubovija' , '109-901',true , false , false , 8,0);
 insert into drivers ( username , password , first_name , last_name , city , phone , active , edit , block , vehicle_id,counter)
-            values ( 'dr9' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Stefan' , 'Zulovic' , 'Nis' , '632-572',false , false , false , 9,0);
+            values ( 'dr9' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Stefan' , 'Zulovic' , 'Nis' , '632-572',true , false , false , 9,0);
 insert into drivers ( username , password , first_name , last_name , city , phone , active , edit , block , vehicle_id,counter)
-            values ('dr11' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Ognjen' , 'Zaric' , 'Leskovac' , '782-888',false , false , false , 10,0);
+            values ('dr11' , '$2a$12$zf/xQmgOilOlFgiZylI/veC2SWmgcNUYbpnsBwL4dFu0sjun4xD2C' , 'Ognjen' , 'Zaric' , 'Leskovac' , '782-888',true , false , false , 10,0);
 
 --CURRENT RIDE
 INSERT INTO rides(BABY_FRIENDLY,PRICE, COMMENT, END_DATE, METERS, NAME, PAID, PANIC, PET_FRIENDLY, START, STATUS, TYPE, DRIVER_ID)
@@ -199,7 +199,7 @@ UPDATE drivers SET current_ride_id = 1 WHERE id = 5;
 
 --FUTURE RIDE
 INSERT INTO rides(BABY_FRIENDLY,PRICE, COMMENT, END_DATE,  METERS, NAME, PAID, PANIC, PET_FRIENDLY, START, STATUS, TYPE, DRIVER_ID)
-VALUES (true,5545, '', DATEDIFF('MS', '1972-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 790, 'voznja next', '', false, true, DATEDIFF('MS', '1972-01-01 00:00:00', CURRENT_TIMESTAMP()), 'PAID', 'CAR', 5);
+VALUES (true,5545, '', DATEDIFF('MS', '1972-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 790, 'voznja next', 'c2', false, true, DATEDIFF('MS', '1972-01-01 00:00:00', CURRENT_TIMESTAMP()), 'PAID', 'CAR', 5);
 
 
 UPDATE routes SET ride_id = 2 WHERE id = 4;
@@ -210,6 +210,33 @@ insert into CITIZENS_RIDES(CITIZENS_ID,RIDES_ID)
         values(2 ,1);
 insert into CITIZENS_RIDES(CITIZENS_ID,RIDES_ID)
 values(2 ,2);
+
+
+--FOR DELETE AFTER KTS
+
+--FUTURE RIDE
+INSERT INTO rides(BABY_FRIENDLY,PRICE, COMMENT, END_DATE,  METERS, NAME, PAID, PANIC, PET_FRIENDLY, START, STATUS, TYPE, DRIVER_ID)
+VALUES (true,5545, '', DATEDIFF('MS', '1972-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 790, 'voznja next', 'c2', false, true, DATEDIFF('MS', '1972-01-01 00:00:00', CURRENT_TIMESTAMP()), 'PAID', 'CAR', 4);
+
+
+UPDATE drivers SET future_ride_id = 3 WHERE id = 4;
+
+INSERT INTO rides(BABY_FRIENDLY,PRICE, COMMENT, END_DATE,  METERS, NAME, PAID, PANIC, PET_FRIENDLY, START, STATUS, TYPE, DRIVER_ID)
+VALUES (true,5545, '', DATEDIFF('MS', '1972-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 790, 'voznja next', 'c2', false, true, DATEDIFF('MS', '1972-01-01 00:00:00', CURRENT_TIMESTAMP()), 'END', 'MINI', 6);
+
+UPDATE drivers SET current_ride_id = 4 WHERE id = 6;
+
+INSERT INTO rides(BABY_FRIENDLY,PRICE, COMMENT, END_DATE,  METERS, NAME, PAID, PANIC, PET_FRIENDLY, START, STATUS, TYPE, DRIVER_ID)
+VALUES (true,5545, '', DATEDIFF('MS', '1972-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 790, 'voznja next', 'c2', false, true, DATEDIFF('MS', '1972-01-01 00:00:00', CURRENT_TIMESTAMP()), 'PAID', 'MINI', 7);
+
+UPDATE drivers SET future_ride_id = 5 WHERE id = 7;
+
+INSERT INTO rides(BABY_FRIENDLY,PRICE, COMMENT, END_DATE,  METERS, NAME, PAID, PANIC, PET_FRIENDLY, START, STATUS, TYPE, DRIVER_ID)
+VALUES (true,5545, '', DATEDIFF('MS', '1972-01-01 00:00:00', DATEADD('MI', 50, CURRENT_TIMESTAMP())), 790, 'voznja next', '', false, true, DATEDIFF('MS', '1972-01-01 00:00:00', CURRENT_TIMESTAMP()), 'CREATE', 'MINI', 8);
+
+UPDATE drivers SET future_ride_id = 6 WHERE id = 8;
+
+insert into CITIZENS_RIDES(CITIZENS_ID , RIDES_ID) values (3,6);
 
 --RIDE TABLE
 --insert into rides(BABY_FRIENDLY,COMMENT,END_DATE,FUTURE,METERS,NAME,PAID,PANIC,PET_FRIENDLY,START,STATUS,TYPE,DRIVER_ID)

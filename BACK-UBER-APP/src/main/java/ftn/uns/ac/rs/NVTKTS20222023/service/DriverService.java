@@ -262,7 +262,6 @@ public class DriverService {
                 }
             }
 
-            cs.unblockAllCitizensByUsernames(driver.getFutureRide().getCitizens());
 
             driver.getFutureRide().setStatus("REJECT");
 
